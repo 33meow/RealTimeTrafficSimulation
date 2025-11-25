@@ -1,4 +1,5 @@
-# RealTimeTrafficSimulation
+# Real-Time Traffic Simulation with Java 🚦
+
 To ensure the project runs smoothly on any machine without requiring path modification, we have structured the project using relative path and self-contained configuration folder.
 
 3.1	Project Structure: 
@@ -23,3 +24,5 @@ The project follows a standard Eclipse Java project structure with a dedicated f
 4.	Execute: Right-click on Main.java and select Run As > Java Application.
 
 5.	Control: The application window will appear. Click the „Start“button to launch the SUMO GUI and begin the simulation.
+
+
