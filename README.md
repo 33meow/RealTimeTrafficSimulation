@@ -25,4 +25,14 @@ The project follows a standard Eclipse Java project structure with a dedicated f
 
 5.	Control: The application window will appear. Click the „Start“button to launch the SUMO GUI and begin the simulation.
 
+## 👥 Team Roles & Task Distribution (Milestone 1)
+
+| Team Member | Project Overview | Architecture & GUI Mockups | TraaS Wrapper Design | Java Implementation (OOP) | SUMO Config & Map | Tech Stack & Testing | 
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Mabchour Salaheddine** | |  |  | ✅ | ✅ | |
+| **Ma Yiyuan** | | ✅ | |  | | ✅ |
+| **Gradwohl Laura** | ✅ | | | | |✅|
+| **Barranco Delgado Raúl** | | |✅ | ✅ |  | |
+| **Member 5**| | | ✅ | |  | ✅|
+
 
