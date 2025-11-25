@@ -7,6 +7,7 @@ public class SimulationManager {
 
 	
 	private SumoTraciConnection conn;
+	private int stepCounter = 0;
 	
 	 /**
 	  * Please make sure the 'SumoConfig' folder is inside the project root.
@@ -47,8 +48,27 @@ public class SimulationManager {
      {
      	try 
      	{
-     		conn.do_timestep();
+     		conn.do_timestep();	
+     		
+     		
+     		double time = (double) conn.do_job_get(Simulation.getTime());
+     		int carCount = (int) conn.do_job_get(Vehicle.getIDCount());
+     		
+     		System.out.println("========== STEP " + stepCounter + " ==========");
+     		System.out.println("Time: " + time + "| How many cars:"+ carCount);
+     		
+     		
+     		List<String> carList = (List<String>) conn.do_job_get(Vehicle.getIDList());
+     		
+     		for (String carId : carList) {
+     			double speed = (double) conn.do_job_get(Vehicle.getSpeed(carId));
+     			System.out.println("-> ID: "+ carId +" | speed: " + speed +"m/s");
+     		}
+     		
+       
+     		
      	} catch (Exception e) {e.printStackTrace();}
+     	
     	
      } // end of nextStep methpd
     
@@ -94,3 +114,4 @@ public class SimulationManager {
     } //end of getConnection method
     
 } //end of class 
+
