@@ -2,7 +2,7 @@
 
 To ensure the project runs smoothly on any machine without requiring path modification, we have structured the project using relative path and self-contained configuration folder.
 
-3.1	Project Structure: 
+## Project Structure: 
 
 The project follows a standard Eclipse Java project structure with a dedicated folder for SUMO configuration files: 
 
@@ -13,7 +13,7 @@ The project follows a standard Eclipse Java project structure with a dedicated f
 -	Referenced Libraries: Contains the TraaS.jar library required for the TraCi interface.
 
 
-3.2	How to Run the Project
+## How to Run the Project
 
 1.	Import: Import the project folder into the Eclipse DIE as an existing Java Project.
 
