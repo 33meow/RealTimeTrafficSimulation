@@ -32,7 +32,7 @@ The project follows a standard Eclipse Java project structure with a dedicated f
 | **Mabchour Salaheddine** | |  |  | ✅ | ✅ | |
 | **Ma Yiyuan** | | ✅ | |  | | ✅ |
 | **Gradwohl Laura** | ✅ | | | | |✅|
-| **Barranco Delgado Raúl** | | |✅ | ✅ |  | |
+| **Mauricio de Souza Hilpert** | | |✅ | ✅ |  | |
 | **Elias Heß**| | | ✅ | |  | ✅|
 
 
