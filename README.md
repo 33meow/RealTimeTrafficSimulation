@@ -35,4 +35,11 @@ The project follows a standard Eclipse Java project structure with a dedicated f
 | **Mauricio de Souza Hilpert** | | |✅ | ✅ |  | |✅ |
 | **Elias Heß**| | | ✅ | |  | ✅| ✅|
 
+## 📅 Time Plan: Features → Time
 
+
+| Milestone | Deadline | Planned Features & Deliverables | Status |
+| :--- | :--- | :--- | :---: |
+| **Milestone 1** | **27.11.2025** | • System Architecture Design<br>• SUMO Connection Setup (TraaS)<br>• Basic Simulation Loop | ✅ Done |
+| **Milestone 2** | **14.12.2025** | • **Interactive Map:** Rendering edges & vehicles in Java Swing<br>• **Vehicle Injection:** "Add Car" GUI functionality<br>• **Basic Control:** Start/Stop/Step buttons | ⏳ In Progress |
+| **Final Submission** | **18.01.2026** | • **Traffic Light Control:** Phase switching via GUI<br>• **Statistics:** Charts & Data Analysis (Speed, CO2)<br>• **Exports:** Save data to CSV/PDF<br>• **Optimization:** Stress testing & Clean Code | 🔮 Planned |
