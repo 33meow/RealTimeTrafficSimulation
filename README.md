@@ -27,12 +27,12 @@ The project follows a standard Eclipse Java project structure with a dedicated f
 
 ## 👥 Team Roles & Task Distribution (Milestone 1)
 
-| Team Member | Project Overview | Architecture & GUI Mockups | TraaS Wrapper Design | Java Implementation (OOP) | SUMO Config & Map | Tech Stack & Testing | 
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Mabchour Salaheddine** | |  |  | ✅ | ✅ | |
-| **Ma Yiyuan** | | ✅ | |  | | ✅ |
-| **Gradwohl Laura** | ✅ | | | | |✅|
-| **Mauricio de Souza Hilpert** | | |✅ | ✅ |  | |
-| **Elias Heß**| | | ✅ | |  | ✅|
+| Team Member | Project Overview | Architecture & GUI Mockups | TraaS Wrapper Design | Java Implementation (OOP) | SUMO Config & Map | Tech Stack & Testing | Documentation |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Mabchour Salaheddine** | |  |  | ✅ | ✅ | |✅ |
+| **Ma Yiyuan** | | ✅ | |  | | ✅ |✅ |
+| **Gradwohl Laura** | ✅ | | | | |✅|✅ |
+| **Mauricio de Souza Hilpert** | | |✅ | ✅ |  | |✅ |
+| **Elias Heß**| | | ✅ | |  | ✅| ✅|
 
 
