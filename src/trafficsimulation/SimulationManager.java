@@ -1,5 +1,6 @@
 package trafficsimulation;
 
+import java.util.List;
 import it.polito.appeal.traci.SumoTraciConnection;
 import de.tudresden.sumo.cmd.Simulation;
 
@@ -114,4 +115,5 @@ public class SimulationManager {
     } //end of getConnection method
     
 } //end of class 
+
 
