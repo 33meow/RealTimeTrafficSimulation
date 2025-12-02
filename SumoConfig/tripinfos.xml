@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2025-11-20 19:50:42 by Eclipse SUMO GUI Version 1.24.0
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="SumoConfig/osm.net.xml.gz"/>
+        <route-files value="SumoConfig/osm.passenger.trips.xml"/>
+        <additional-files value="SumoConfig/output.add.xml"/>
+    </input>
+
+    <output>
+        <tripinfo-output value="SumoConfig/tripinfos.xml"/>
+        <statistic-output value="SumoConfig/stats.xml"/>
+    </output>
+
+    <processing>
+        <ignore-route-errors value="true"/>
+        <tls.actuated.jam-threshold value="30"/>
+    </processing>
+
+    <routing>
+        <device.rerouting.adaptation-steps value="18"/>
+        <device.rerouting.adaptation-interval value="10"/>
+    </routing>
+
+    <report>
+        <verbose value="true"/>
+        <duration-log.statistics value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <traci_server>
+        <remote-port value="56973"/>
+    </traci_server>
+
+    <gui_only>
+        <gui-settings-file value="SumoConfig/osm.view.xml"/>
+        <start value="true"/>
+    </gui_only>
+
+</sumoConfiguration>
+-->
+
+<tripinfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tripinfo_file.xsd">
+    <tripinfo id="veh0" depart="0.00" departLane="1423271274_0" departPos="5.10" departSpeed="8.83" departDelay="0.00" arrival="19.00" arrivalLane="1423265552#2_0" arrivalPos="91.33" arrivalSpeed="14.42" duration="19.00" routeLength="182.48" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="2.58" rerouteNo="0" devices="tripinfo_veh0 routing_veh0" vType="veh_passenger" speedFactor="1.06" vaporized=""/>
+</tripinfos>
