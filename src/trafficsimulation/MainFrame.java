@@ -1,0 +1,73 @@
+package trafficsimulation;
+
+import javax.swing.*;
+import java.awt.*;
+
+/**
+ * The Main Window (View) of the application.
+ * Holds the MapPanel and the Control Buttons.
+ */
+public class MainFrame extends JFrame {
+    
+    // --- Main Components ---
+    private MapPanel mapPanel;
+    
+    // --- Control Panel Components ---
+    private JButton startButton;
+    private JButton stepButton;
+    private JButton stopButton;
+    private JButton addCarButton;
+    
+    // Dropdown menu for vehicle selection
+    private JComboBox<String> carSelector;
+
+    public MainFrame(MapPanel mapPanel) {
+        this.mapPanel = mapPanel;
+        
+        // 1. Window Setup
+        setTitle("Traffic Simulation - Pro Version");
+        setSize(1000, 700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        
+        // 2. Add Map to Center
+        add(mapPanel, BorderLayout.CENTER);
+        
+        // 3. Setup Control Panel (Bottom)
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout()); // Aligns buttons in a row
+        
+        // Initialize Buttons
+        startButton = new JButton("Start");
+        stepButton  = new JButton("Step");
+        stopButton  = new JButton("Stop");
+        addCarButton = new JButton("Add Car");
+        
+        // Initialize Car Selector
+        String[] carTypes = {"standard", "ferrari", "Formula1", "Bugatti", "Mahmoudi"};
+        carSelector = new JComboBox<>(carTypes);
+        
+        // Add components to Bottom Panel
+        bottomPanel.add(startButton);
+        bottomPanel.add(stepButton);
+        bottomPanel.add(new JLabel("| Type:")); // Visual separator
+        bottomPanel.add(carSelector);
+        bottomPanel.add(addCarButton);
+        bottomPanel.add(stopButton);
+        
+        // Add Bottom Panel to Frame
+        add(bottomPanel, BorderLayout.SOUTH);
+        
+        // Show Window
+        setVisible(true);
+    }
+
+    // --- Getters for Controller Access ---
+
+    public JButton getStartButton() { return startButton; }
+    public JButton getStepButton() { return stepButton; }
+    public JButton getStopButton() { return stopButton; }
+    public JButton getAddCarButton() { return addCarButton; }
+    public JComboBox<String> getCarSelector() { return carSelector; }
+    public MapPanel getMapPanel() { return mapPanel; }
+}
