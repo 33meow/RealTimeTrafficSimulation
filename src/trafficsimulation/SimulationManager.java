@@ -7,7 +7,7 @@ public class SimulationManager {
 
     // --- Configuration Constants ---
     // Path to the SUMO configuration file
-    private static final String CONFIG_FILE = "SumoConfig/DefaultMap/osm.sumocfg";
+    private static final String CONFIG_FILE = "SumoConfig/osm.sumocfg";
     private static final String SUMO_BIN = "sumo-gui";
 
     // --- Core Connection Fields ---
@@ -93,4 +93,5 @@ public class SimulationManager {
     public SumoTraciConnection getConnection() {
         return this.conn;
     }
+
 }
