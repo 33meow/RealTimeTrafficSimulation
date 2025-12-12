@@ -17,6 +17,9 @@ public class MainFrame extends JFrame {
     private JButton stepButton;
     private JButton stopButton;
     private JButton addCarButton;
+
+    private JButton stressTestButton;  //for stress test
+
     
     // Dropdown menu for vehicle selection
     private JComboBox<String> carSelector;
@@ -42,6 +45,8 @@ public class MainFrame extends JFrame {
         stepButton  = new JButton("Step");
         stopButton  = new JButton("Stop");
         addCarButton = new JButton("Add Car");
+
+        stressTestButton = new JButton("Stress Test"); // for Stress test
         
         // Initialize Car Selector
         String[] carTypes = {"standard", "ferrari", "Formula1", "Bugatti", "Mahmoudi"};
@@ -54,6 +59,7 @@ public class MainFrame extends JFrame {
         bottomPanel.add(carSelector);
         bottomPanel.add(addCarButton);
         bottomPanel.add(stopButton);
+        bottomPanel.add(stressTestButton);  //for stress test
         
         // Add Bottom Panel to Frame
         add(bottomPanel, BorderLayout.SOUTH);
@@ -70,4 +76,6 @@ public class MainFrame extends JFrame {
     public JButton getAddCarButton() { return addCarButton; }
     public JComboBox<String> getCarSelector() { return carSelector; }
     public MapPanel getMapPanel() { return mapPanel; }
+    public JButton getStressTestButton() { return stressTestButton; }
+
 }
