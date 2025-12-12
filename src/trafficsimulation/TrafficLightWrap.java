@@ -75,6 +75,32 @@ public class TrafficLightWrap {
            // Ignore update errors
         }
     }
+    
+    /**
+     * Switch to the next traffic light phase in SUMO (via TraCI / TraaS).
+     * Reads the current phase index, increments it, applies it, then refreshes the state string.
+     */
+    public void switchToNextPhase() {
+        try {
+            // 1) read current phase index (0,1,2,...)
+            int currentPhase = (Integer) conn.do_job_get(Trafficlight.getPhase(id));
+
+            // 2) next phase (simple increment)
+            int nextPhase = currentPhase + 1;
+
+            // 3) apply next phase
+            conn.do_job_set(Trafficlight.setPhase(id, nextPhase));
+
+            // 4) refresh cached state so GUI can display the new colors
+            updateState();
+
+        } catch (Exception e) {
+            // keep simulation running even if one junction fails
+            // (optional: replace with logger if your project uses logging)
+            // Logger.getLogger(TrafficLightWrap.class.getName()).warning(...);
+        }
+    }
+
 
     // --- Getters ---
 
