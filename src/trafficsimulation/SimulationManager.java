@@ -3,12 +3,17 @@ package trafficsimulation;
 import de.tudresden.sumo.cmd.Simulation;
 import it.polito.appeal.traci.SumoTraciConnection;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class SimulationManager {
 
     // --- Configuration Constants ---
     // Path to the SUMO configuration file
     private static final String CONFIG_FILE = "SumoConfig/osm.sumocfg";
     private static final String SUMO_BIN = "sumo-gui";
+
+    private static final Logger logger = LogManager.getLogger(SimulationManager.class);
 
     // --- Core Connection Fields ---
     private SumoTraciConnection conn;
@@ -23,7 +28,8 @@ public class SimulationManager {
      */
     public void startSimulation() {
         try {
-            System.out.println("🚀 Starting SUMO Simulation...");
+            //System.out.println("Starting SUMO Simulation...");
+            logger.info("Starting SUMO Simulation...");
             
             // 1. Establish connection to SUMO
             conn = new SumoTraciConnection(SUMO_BIN, CONFIG_FILE);
@@ -34,11 +40,13 @@ public class SimulationManager {
             vehicleRepo = new VehicleRepository(conn);
             lightRepo = new TrafficLightRepository(conn);
             
-            System.out.println("✅ SUMO is running. Repositories initialized.");
-
+            //System.out.println("SUMO is running. Repositories initialized.");
+            logger.info("SUMO started successfully. Repositories initialized.");
+            
         } catch (Exception e) {
-            System.err.println("❌ Error starting SUMO:");
-            e.printStackTrace();
+            //System.err.println("Error starting SUMO:");
+            //e.printStackTrace();
+            logger.error("Critical Error starting SUMO: ", e);
         }
     }
 
@@ -63,10 +71,13 @@ public class SimulationManager {
             // 4. Update Counters & Logs
             stepCounter++; 
             double time = (double) conn.do_job_get(Simulation.getTime());
-            System.out.println("Step: " + stepCounter + " | Sim Time: " + time);
-
+            
+            //System.out.println("Step: " + stepCounter + " | Sim Time: " + time);
+            logger.debug("Step: {} | Sim Time: {}", stepCounter, time);
+            
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            logger.error("Error during simulation step:", e);
         }
     }
 
@@ -76,7 +87,8 @@ public class SimulationManager {
     public void stopSimulation() {
         if (conn != null && !conn.isClosed()) {
             conn.close();
-            System.out.println("🛑 Simulation stopped.");
+            //System.out.println("Simulation stopped.");
+            logger.warn("Simulation stopped by user.");
         }
     }
 
@@ -95,3 +107,4 @@ public class SimulationManager {
     }
 
 }
+
