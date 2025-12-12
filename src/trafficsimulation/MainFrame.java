@@ -63,7 +63,7 @@ public class MainFrame extends JFrame {
         // Add components to Bottom Panel
         bottomPanel.add(startButton);
         bottomPanel.add(stepButton);
-        bottomPanel.add(new JLabel("| Type:")); // Visual separator
+        bottomPanel.add(new JLabel("Vehicle Type:")); // Visual separator
         bottomPanel.add(carSelector);
         bottomPanel.add(addCarButton);
         bottomPanel.add(stopButton);
@@ -92,5 +92,6 @@ public class MainFrame extends JFrame {
     public JButton getSwitchLightButton() { return switchLightButton; }	//for TrafficLight
 
 }
+
 
 
