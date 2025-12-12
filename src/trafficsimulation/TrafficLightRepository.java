@@ -6,12 +6,17 @@ import it.polito.appeal.traci.SumoTraciConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Manages the collection of all Traffic Lights in the simulation.
  * Acts as a central "Database" to store and update light states.
  */
 public class TrafficLightRepository {
-    
+
+    private static final Logger logger = LogManager.getLogger(TrafficLightRepository.class);
+
     // --- Fields ---
     private List<TrafficLightWrap> lights;
     private SumoTraciConnection conn;
@@ -37,11 +42,13 @@ public class TrafficLightRepository {
             for (String id : ids) {
                 lights.add(new TrafficLightWrap(id, conn));
             }
-            System.out.println("🚦 Loaded " + lights.size() + " Traffic Lights.");
+            //System.out.println("Loaded " + lights.size() + " Traffic Lights.");
+            logger.info("🚦 Loaded {} Traffic Lights from the map.", lights.size());
             
         } catch (Exception e) {
-            System.err.println("Error loading traffic lights:");
-            e.printStackTrace();
+            //System.err.println("Error loading traffic lights:");
+            //e.printStackTrace();
+            logger.error("Error loading traffic lights:", e);
         }
     }
 
@@ -60,4 +67,5 @@ public class TrafficLightRepository {
     public List<TrafficLightWrap> getList() { 
         return lights; 
     }
+
 }
