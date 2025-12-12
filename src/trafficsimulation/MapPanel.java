@@ -43,7 +43,7 @@ public class MapPanel extends JPanel {
         loadImage("ferrari",  "photos/ferrari.png");
         loadImage("Formula1", "photos/Formula1.png");
         loadImage("Bugatti",  "photos/Bugatti.png");
-        loadImage("Mahmoudi", "photos/Mahmoudi.png");
+        loadImage("Red Car", "photos/car.png");
 
         // --- Mouse Listener for Panning (Drag) ---
         MouseAdapter ma = new MouseAdapter() {
@@ -242,4 +242,5 @@ public class MapPanel extends JPanel {
             }
         } catch (Exception e) { }
     }
+
 }
