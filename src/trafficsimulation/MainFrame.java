@@ -49,7 +49,7 @@ public class MainFrame extends JFrame {
         stressTestButton = new JButton("Stress Test"); // for Stress test
         
         // Initialize Car Selector
-        String[] carTypes = {"standard", "ferrari", "Formula1", "Bugatti", "Mahmoudi"};
+        String[] carTypes = {"standard", "ferrari", "Formula1", "Bugatti", "Red Car"};
         carSelector = new JComboBox<>(carTypes);
         
         // Add components to Bottom Panel
@@ -79,3 +79,4 @@ public class MainFrame extends JFrame {
     public JButton getStressTestButton() { return stressTestButton; }
 
 }
+
