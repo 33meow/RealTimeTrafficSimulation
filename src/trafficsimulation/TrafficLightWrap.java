@@ -9,6 +9,9 @@ import it.polito.appeal.traci.SumoTraciConnection;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * Represents a Traffic Light logic (Junction) in the simulation.
@@ -17,6 +20,8 @@ import java.util.List;
 public class TrafficLightWrap {
     
     // --- Fields ---
+	private static final Logger logger =
+	        LoggerFactory.getLogger(TrafficLightWrap.class);
     private String id;
     private SumoTraciConnection conn;
     private String currentState = ""; 
@@ -86,18 +91,19 @@ public class TrafficLightWrap {
             int currentPhase = (Integer) conn.do_job_get(Trafficlight.getPhase(id));
 
             // 2) next phase (simple increment)
-            int nextPhase = currentPhase + 1;
+            int nextPhase = (currentPhase + 1) % 4;
 
             // 3) apply next phase
             conn.do_job_set(Trafficlight.setPhase(id, nextPhase));
 
             // 4) refresh cached state so GUI can display the new colors
             updateState();
-
+         
+            // 5) log success
+            logger.info("Switched Light '{}' to phase {}", id, nextPhase);
+            
         } catch (Exception e) {
-            // keep simulation running even if one junction fails
-            // (optional: replace with logger if your project uses logging)
-            // Logger.getLogger(TrafficLightWrap.class.getName()).warning(...);
+        	logger.error("Error switching traffic light: " + id, e);
         }
     }
 
