@@ -1,11 +1,18 @@
 package trafficsimulation;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 /**
  * The Controller Class (MVC Pattern).
  * Handles user interactions (Button Clicks) and bridges the View (MainFrame) 
  * with the Model/Logic (SimulationManager).
  */
 public class GuiController {
+
+    private static final Logger logger = LogManager.getLogger(GuiController.class);
+
     
     // --- Core Components ---
     private MainFrame view;
@@ -53,5 +60,36 @@ public class GuiController {
                 view.getMapPanel().repaint();
             }
         });
+                // 4. Stress Test
+        view.getStressTestButton().addActionListener(e -> {
+            if (manager.getRepository() != null) {
+                logger.warn("STARTING STRESS TEST SCENARIO");
+                
+                logger.warn("Injecting 100 vehicles...");
+                manager.getRepository().addVehicle(100, "DEFAULT_VEHTYPE", "standard");
+                
+                
+                new Thread(() -> {
+                    logger.info("Running 100 fast simulation steps...");
+                    
+                    try {
+                        for (int i = 0; i < 100; i++) {
+                            manager.nextStep();
+                            view.getMapPanel().repaint();
+                            
+                            Thread.sleep(50); 
+                        }
+                        logger.info("Stress Test Sequence Finished.");
+                        
+                    } catch (InterruptedException ex) {
+                        logger.error("Stress test interrupted", ex);
+                    }
+                }).start();
+
+            } else {
+                logger.error("Cannot run Stress Test: Simulation not running.");
+            }
+        });
     }
+
 }
