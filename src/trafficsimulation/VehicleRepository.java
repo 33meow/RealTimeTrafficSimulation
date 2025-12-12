@@ -8,6 +8,9 @@ import it.polito.appeal.traci.SumoTraciConnection;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Manages the lifecycle of vehicles in the simulation.
  * Handles adding new cars, defining their routes, and tracking their updates.
@@ -19,6 +22,8 @@ public class VehicleRepository {
     private SumoTraciConnection conn;
     private int totalCars; 
     private Random rand; 
+
+    private static final Logger logger = LogManager.getLogger(VehicleRepository.class);
 
     // --- Constructor ---
     public VehicleRepository(SumoTraciConnection conn) {
@@ -78,12 +83,15 @@ public class VehicleRepository {
                 // 7. Store the vehicle wrapper with its visual image
                 VehicleWrap newCar = new VehicleWrap(carId, conn, imageName);
                 vehicles.add(newCar);
+
+                logger.info("Added {} vehicles of type '{}' with image '{}'", n, type, imageName);
                 
                 totalCars++;
             }
         } catch (Exception e) {
-            System.err.println("Error adding vehicle:");
-            e.printStackTrace();
+            //System.err.println("Error adding vehicle:");
+            //e.printStackTrace();
+            logger.error("Failed to add vehicle:", e);
         }
     }
 
@@ -117,4 +125,5 @@ public class VehicleRepository {
     public ArrayList<VehicleWrap> getList() { 
         return vehicles; 
     }
+
 }
