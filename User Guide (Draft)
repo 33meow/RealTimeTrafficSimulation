@@ -1,0 +1,39 @@
+User Guide (Draft): Traffic Simulation
+
+    1. Introduction:
+       Welcome to our Traffic Simulation tool. This tool allows you to simulate and analyse traffic flows in real time. You can control the vehicles and the signals.
+
+    2. Interface overview
+       The control panel contains buttons located at the bottom of the screen.
+       The following elements:
+    • Start
+    • Step
+    • Vehicle Type
+    • Add Car 
+    • Stop
+    • Stress Test
+    • Signal 
+    • Switch 
+
+    3. Basic operation
+
+    • Start:
+      To start the SUMO programme, press the start button.
+    • Step:
+      Advances the simulation by one step.
+    • Vehicle Type:
+      A dropdown menu to select the vehicle type to add. Options are: Standard, Ferrari, 
+      Formula 1, Bugatti and Red Car.
+    • Add Car:
+      Inserts a new vehicle of the selected type (default: standard) in a random position on the map.
+    • Stop:
+      Stops the SUMO program.
+    • Stress Test:
+      Stress tests the program with the maximum number of cars on the map with automatic steps.
+    • Signal:
+      ?????
+    • Switch:
+      Allows you to manually switch the state of the traffic light.
+
+
+
