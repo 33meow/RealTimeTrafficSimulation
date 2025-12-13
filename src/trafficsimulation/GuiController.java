@@ -3,18 +3,11 @@ package trafficsimulation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-/**
- * The Controller Class (MVC Pattern).
- * Handles user interactions (Button Clicks) and bridges the View (MainFrame) 
- * with the Model/Logic (SimulationManager).
- */
 public class GuiController {
-
-    private static final Logger logger = LogManager.getLogger(GuiController.class);
-
     
-    // --- Core Components ---
+    // Logger for tracking events
+    private static final Logger logger = LogManager.getLogger(GuiController.class);
+    
     private MainFrame view;
     private SimulationManager manager;
 
@@ -24,72 +17,93 @@ public class GuiController {
         initController();
     }
 
-    /**
-     * Initializes Event Listeners for all UI buttons.
-     */
     private void initController() {
         
-        // --- 1. Simulation Control Buttons ---
-        
-        // Start Simulation
-        view.getStartButton().addActionListener(e -> manager.startSimulation());
+        // --- 1. START BUTTON ---
+        view.getStartButton().addActionListener(e -> {
+            logger.info("START clicked.");
+            manager.startSimulation();
 
-        // Step Forward (Manual Control)
-        view.getStepButton().addActionListener(e -> {
-            manager.nextStep();
-            view.getMapPanel().repaint(); // Refresh the map to show changes
+            // Populate list immediately after start finishes
+            if (manager.getLightRepository() != null) {
+                view.getLightSelector().removeAllItems();
+                
+                for (TrafficLightWrap tl : manager.getLightRepository().getList()) {
+                    view.getLightSelector().addItem(tl.getID());
+                }
+                logger.info("Traffic Lights loaded into menu.");
+            } else {
+                logger.warn("No Traffic Light Repository found yet.");
+            }
         });
 
-        // Stop Simulation
+        // --- 2. SWITCH BUTTON ---
+        view.getSwitchLightButton().addActionListener(e -> {
+            String selectedId = (String) view.getLightSelector().getSelectedItem();
+            
+            if (selectedId != null && manager.getLightRepository() != null) {
+                for (TrafficLightWrap tl : manager.getLightRepository().getList()) {
+                    if (tl.getID().equals(selectedId)) {
+                        
+                        logger.info("Switching Light: {}", selectedId);
+                        
+                        // 1. Switch the light logic
+                        tl.switchToNextPhase(); 
+                       
+                        
+                        //Repaint to try and show color update
+                        view.getMapPanel().repaint();
+                        break;
+                    }
+                }
+            }
+        });
+
+        // --- 3. STEP BUTTON ---
+        view.getStepButton().addActionListener(e -> {
+            manager.nextStep();
+            view.getMapPanel().repaint();
+        });
+
+        // --- 4. STOP BUTTON ---
         view.getStopButton().addActionListener(e -> manager.stopSimulation());
 
-        // --- 2. Interaction Buttons (Add Vehicle) ---
-        
+        // --- 5. ADD CAR BUTTON ---
         view.getAddCarButton().addActionListener(e -> {
-            // Ensure simulation is running and repository exists
             if (manager.getRepository() != null) {
-                
-                // 1. Retrieve the selected vehicle type (Image Name) from the dropdown menu
                 String selectedImage = (String) view.getCarSelector().getSelectedItem();
-                
-                // 2. Add the vehicle to the repository logic
+                logger.info("Adding car: {}", selectedImage);
                 manager.getRepository().addVehicle(1, "DEFAULT_VEHTYPE", selectedImage);
-                
-                // 3. Update simulation immediately to show the new car
                 manager.nextStep(); 
                 view.getMapPanel().repaint();
             }
         });
-                // 4. Stress Test
+
+        // --- 6. STRESS TEST ---
         view.getStressTestButton().addActionListener(e -> {
             if (manager.getRepository() != null) {
-                logger.warn("STARTING STRESS TEST SCENARIO");
+                logger.warn("STARTING STRESS TEST");
                 
-                logger.warn("Injecting 100 vehicles...");
+                // Add cars
                 manager.getRepository().addVehicle(100, "DEFAULT_VEHTYPE", "standard");
                 
-                
+                // Run fast steps in a background thread
                 new Thread(() -> {
-                    logger.info("Running 100 fast simulation steps...");
-                    
                     try {
                         for (int i = 0; i < 100; i++) {
                             manager.nextStep();
                             view.getMapPanel().repaint();
-                            
-                            Thread.sleep(50); 
+                            Thread.sleep(50); // Small delay to see animation
                         }
-                        logger.info("Stress Test Sequence Finished.");
-                        
+                        logger.info("Stress Test Finished.");
                     } catch (InterruptedException ex) {
                         logger.error("Stress test interrupted", ex);
                     }
                 }).start();
 
             } else {
-                logger.error("Cannot run Stress Test: Simulation not running.");
+                logger.error("Simulation not running.");
             }
         });
     }
-
 }

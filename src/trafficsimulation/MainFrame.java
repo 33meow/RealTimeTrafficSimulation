@@ -17,6 +17,10 @@ public class MainFrame extends JFrame {
     private JButton stepButton;
     private JButton stopButton;
     private JButton addCarButton;
+    
+    //for TrafficLight
+    private JComboBox<String> lightSelector;
+    private JButton switchLightButton;
 
     private JButton stressTestButton;  //for stress test
 
@@ -47,19 +51,26 @@ public class MainFrame extends JFrame {
         addCarButton = new JButton("Add Car");
 
         stressTestButton = new JButton("Stress Test"); // for Stress test
+         switchLightButton = new JButton("Switch"); //for TrafficLight
         
         // Initialize Car Selector
         String[] carTypes = {"standard", "ferrari", "Formula1", "Bugatti", "Red Car"};
         carSelector = new JComboBox<>(carTypes);
+
+        lightSelector = new JComboBox<>(); // for TrafficLight
+
         
         // Add components to Bottom Panel
         bottomPanel.add(startButton);
         bottomPanel.add(stepButton);
-        bottomPanel.add(new JLabel("| Type:")); // Visual separator
+        bottomPanel.add(new JLabel("Vehicle Type:")); // Visual separator
         bottomPanel.add(carSelector);
         bottomPanel.add(addCarButton);
         bottomPanel.add(stopButton);
         bottomPanel.add(stressTestButton);  //for stress test
+        bottomPanel.add(new JLabel(" | Signal: ")); //for TrafficLight (choosing which one to change)
+        bottomPanel.add(lightSelector);				//for TrafficLight
+        bottomPanel.add(switchLightButton);         //for TrafficLight
         
         // Add Bottom Panel to Frame
         add(bottomPanel, BorderLayout.SOUTH);
@@ -77,6 +88,10 @@ public class MainFrame extends JFrame {
     public JComboBox<String> getCarSelector() { return carSelector; }
     public MapPanel getMapPanel() { return mapPanel; }
     public JButton getStressTestButton() { return stressTestButton; }
+    public JComboBox<String> getLightSelector() { return lightSelector; } //for TrafficLight
+    public JButton getSwitchLightButton() { return switchLightButton; }	//for TrafficLight
 
 }
+
+
 
