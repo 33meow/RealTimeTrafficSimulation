@@ -31,7 +31,7 @@ User Guide (Draft): Traffic Simulation
     • Stress Test:
       Stress tests the program with the maximum number of cars on the map with automatic steps.
     • Signal:
-      ?????
+      A dropdown menu to select intercetion for the traffic light change.
     • Switch:
       Allows you to manually switch the state of the traffic light.
 
