@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 /**
  * Represents a Traffic Light logic (Junction) in the simulation.
  * Handles the positions of individual signal heads and their current states.
@@ -23,8 +24,6 @@ import org.apache.logging.log4j.Logger;
 public class TrafficLightWrap {
     
     // --- Fields ---
-	private static final Logger logger =
-	        LoggerFactory.getLogger(TrafficLightWrap.class);
     private String id;
     private SumoTraciConnection conn;
     private String currentState = ""; 
@@ -135,3 +134,4 @@ public class TrafficLightWrap {
     }
 
 }
+
