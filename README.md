@@ -147,7 +147,7 @@ The project follows a standard Eclipse Java project structure, utilizing the **M
 | :--- | :---: | :--- | :--- |
 | **Mabchour Salaheddine** | ✅ | **Vehicle System** | • `VehicleRepository` (Data Logic)<br>• `VehicleWrap` (Object Model) |
 | **Ma Yiyuan** | ✅ | **Traffic Logic** | • `TrafficLightRepository`<br>• `TrafficLightWrap` (Phase Control) |
-| **Gradwohl Laura** | ✅ | **UI Components** | • Progress Summary GUI Implementation Code Testing<br>• Status Monitoring Interface |
+| **Gradwohl Laura** | ✅ | **UI Components** | • Progress Summary GUI Implementation • Code Testing<br>• Status Monitoring Interface |
 | **Mauricio de Souza Hilpert** | ✅ | **Core GUI & Testing** | • Main GUI Integration<br>• **Stress Test** Scenario & Logic |
 | **Elias Heß** | ✅ | **Visualization** | • `MapPanel` (Rendering & Graphics)<br>• User Guide Draft |
 
