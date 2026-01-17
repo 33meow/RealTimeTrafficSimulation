@@ -15,6 +15,7 @@ public class SimulationManager {
 
     private static final Logger logger = LogManager.getLogger(SimulationManager.class);
 
+
     // --- Core Connection Fields ---
     private SumoTraciConnection conn;
     private int stepCounter = 0;
@@ -49,6 +50,10 @@ public class SimulationManager {
             logger.error("Critical Error starting SUMO: ", e);
         }
     }
+    
+    //initiiert die LogExport-Klasse
+    private LogExport exLog = new LogExport();
+
 
     /**
      * Advances the simulation by one step and updates all entities.
@@ -75,6 +80,12 @@ public class SimulationManager {
             //System.out.println("Step: " + stepCounter + " | Sim Time: " + time);
             logger.debug("Step: {} | Sim Time: {}", stepCounter, time);
             
+            
+            //int vehicleCount = vehicleRepo.getVehicleCount(); //noch nicht implementiert
+            
+            // CSV Log-Eintrag
+            exLog.logStep(stepCounter, time); //exLog.logStep(stepCounter, time, vehicleCount); wenn vehicleCount implementiert ist
+            
         } catch (Exception e) {
             //e.printStackTrace();
             logger.error("Error during simulation step:", e);
@@ -89,6 +100,10 @@ public class SimulationManager {
             conn.close();
             //System.out.println("Simulation stopped.");
             logger.warn("Simulation stopped by user.");
+            
+         // CSV Export
+            CsvExporter.export("simulation.csv", exLog.getRows());
+            logger.info("Simulation data exported to simulation_run.csv");
         }
     }
 
