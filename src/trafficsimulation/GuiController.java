@@ -139,7 +139,7 @@ public class GuiController {
                 logger.error("Simulation not running.");
             }
         });
-<<<<<<< HEAD
+
     
        //view.getExportCsvButton().addActionListener(e -> {
            // JFileChooser chooser = new JFileChooser();
@@ -148,7 +148,7 @@ public class GuiController {
        
        
        
-=======
+
 
         // For traffic light control (set time=
                 view.getSetDurationButton().addActionListener(e -> {
@@ -186,8 +186,9 @@ public class GuiController {
 
         mapPanel.updateVehicles(filter.getFiltered());
         mapPanel.repaint();
->>>>>>> 5c8eb1ddc8fa5c020fe6fecbda10a3d20a6c9dae
+
     }
 }
+
 
 
