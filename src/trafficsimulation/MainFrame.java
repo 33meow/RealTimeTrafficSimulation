@@ -54,7 +54,7 @@ public class MainFrame extends JFrame {
          switchLightButton = new JButton("Switch"); //for TrafficLight
         
         // Initialize Car Selector
-        String[] carTypes = {"standard", "ferrari", "Formula1", "Bugatti", "Red Car"};
+        String[] carTypes = {"Red", "Yellow", "Blue", "White"};
         carSelector = new JComboBox<>(carTypes);
 
         lightSelector = new JComboBox<>(); // for TrafficLight
@@ -92,6 +92,7 @@ public class MainFrame extends JFrame {
     public JButton getSwitchLightButton() { return switchLightButton; }	//for TrafficLight
 
 }
+
 
 
 
