@@ -44,7 +44,7 @@ public class GuiController {
         // Update Swing components on the Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
             view.getStatisticsPanel().setVehicleCount(vehicleCount);
-            view.getStatisticsPanel().addCo2Value(co2);
+            view.getStatisticsPanel().addCo2Value(step, co2);
         });
     }
 
