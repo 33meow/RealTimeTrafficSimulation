@@ -190,6 +190,8 @@ public class VehicleRepository {
     public ArrayList<VehicleWrap> getList() { 
         return vehicles; 
     }
+
+
     public double getTotalCo2Emission() {
         double total = 0.0;
 
