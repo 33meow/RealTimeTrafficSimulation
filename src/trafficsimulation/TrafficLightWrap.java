@@ -145,16 +145,6 @@ public class TrafficLightWrap {
     	
     }
 
-    /**
-     * Returns current CO2 emission of this vehicle (mg/s).
-     */
-    public double getCo2Emission() {
-        try {
-            return (double) conn.do_job_get(Vehicle.getCO2Emission(id));
-        } catch (Exception e) {
-            return 0.0;
-        }
-    }
 
 }
 
