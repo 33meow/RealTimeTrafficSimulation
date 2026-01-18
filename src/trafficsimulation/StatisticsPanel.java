@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.LinkedList;
 
 /**
- * Panel shown in the top-right corner of the GUI.
+ * Panel shown in the top-left corner of the GUI.
  * Displays live simulation statistics.
  */
 public class StatisticsPanel extends JPanel {
