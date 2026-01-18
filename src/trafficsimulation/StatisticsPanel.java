@@ -38,16 +38,16 @@ public class StatisticsPanel extends JPanel {
         vehicleCountLabel.setText("Vehicles: " + count);
     }
 
-        /**
-         * Adds a new CO2 value and keeps only the last five.
-         */
-        public void addCo2Value(double value) {
-            if (co2History.size() == 5) {
-                co2History.removeFirst();
-            }
-            co2History.add(value);
-            updateCo2Display();
-        }
+    /**
+     * Adds a CO2 value for the current step.
+     * Newest step is always inserted at the top.
+     */
+    public void addCo2Value(int step, double value) {
+        String line = String.format(
+                "Step %d: %.2f mg/s%n",
+                step,
+                value
+        );
 
         /**
          * Refreshes the CO2 history display.
