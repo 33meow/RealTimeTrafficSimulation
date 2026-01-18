@@ -45,6 +45,7 @@ public class MainFrame extends JFrame {
     // Dropdown menu for vehicle selection
     private JComboBox<String> carSelector;
 
+    // for StatisticPanel
     private StatisticsPanel statisticsPanel;
 
     public MainFrame(MapPanel mapPanel) {
