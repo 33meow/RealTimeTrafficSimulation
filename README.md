@@ -51,6 +51,10 @@ Select a junction and click **Switch** to change the traffic light color instant
 Click **Stress Test** to inject a heavy load of vehicles and test performance.
 ![Stress Test](Screenshots/stressTest.png)
 
+### 8. Export CSV File
+Click **Export CSV** to download the CSV File to a folder of your choice.
+![Export CSV](Screenshots/Screenshot_ExportCSV.png)
+
 ### 9. Stopping the Simulation
 Click the **Stop** button to close the connection and end the session safely.
 ![Click Stop](Screenshots/stop.png)
