@@ -40,6 +40,7 @@ public class GuiController {
         // Get data
         int vehicleCount = manager.getActiveVehicleCount();
         double co2 = manager.getCurrentCo2Emission();
+        int step= manager.getStepCounter();
 
         // Update Swing components on the Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
