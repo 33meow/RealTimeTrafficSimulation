@@ -62,7 +62,7 @@ public class MainFrame extends JFrame {
         // --- Statistics Panel---
         statisticsPanel = new StatisticsPanel();
 
-// Use absolute positioning to ensure visibility on top of the map
+        //Hardcoded to the left top corner
         mapPanel.setLayout(null);
         statisticsPanel.setBounds(0, 10, 180, 180);
         mapPanel.add(statisticsPanel);
