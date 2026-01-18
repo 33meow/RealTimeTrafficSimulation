@@ -132,6 +132,19 @@ public class TrafficLightWrap {
         }
     }
 
+
+    // for traffic light control
+        public void setPhaseDuration(double seconds) 
+    {
+    	try {
+    		conn.do_job_set(de.tudresden.sumo.cmd.Trafficlight.setPhaseDuration(this.id, seconds));
+    		System.out.println("Time set  to " + seconds +"s for "+ this.id);
+    		
+    	} catch (Exception e) {System.err.println("Error");}
+    	
+    }
+
 }
+
 
 

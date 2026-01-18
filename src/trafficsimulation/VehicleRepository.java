@@ -3,10 +3,12 @@ package trafficsimulation;
 import de.tudresden.sumo.cmd.Edge;
 import de.tudresden.sumo.cmd.Route;
 import de.tudresden.sumo.cmd.Vehicle;
+import de.tudresden.sumo.objects.SumoColor;
 import de.tudresden.sumo.objects.SumoStringList;
 import it.polito.appeal.traci.SumoTraciConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +36,7 @@ public class VehicleRepository {
         this.rand = new Random();
     }
 
- 
+
 
     /**
      * Adds 'n' new vehicles safely.
@@ -48,8 +50,8 @@ public class VehicleRepository {
             if (allEdges.isEmpty()) return;
 
             for (int i = 0; i < n; i++) {
-                
-                // Generate Unique ID 
+
+                // Generate Unique ID
                 String carId;
                 do {
                     vehicleCounter++;
@@ -122,10 +124,28 @@ public class VehicleRepository {
             Iterator<VehicleWrap> iterator = vehicles.iterator();
             while (iterator.hasNext()) {
                 VehicleWrap car = iterator.next();
-                
+
                 if (activeIds.contains(car.getID())) {
                     // Car is still running -> Update it
                     car.updateVehicle();
+
+                    // TypeID (for Debugging)
+                    try {
+                        String typeID = (String) conn.do_job_get(Vehicle.getTypeID(car.getID()));
+
+                        System.out.println("Auto " + car.getID() + " - Type: " + typeID + " - ImageName: " + car.getImageName());
+                    } catch (Exception e) {
+                        System.out.println("Fehler beim Type holen: " + e.getMessage());
+                    }
+
+                    // Edge aktualisieren
+                    try {
+                        String edge = (String) conn.do_job_get(Vehicle.getRoadID(car.getID()));
+                        car.setEdge(edge);
+                        System.out.println("Auto " + car.getID() + " - Edge: " + edge);
+                    } catch (Exception e) {
+                        System.out.println("Fehler beim Edge holen: " + e.getMessage());
+                    }
                 } else {
                     // Car is gone from SUMO -> Remove from Java list
                     iterator.remove();
@@ -139,7 +159,7 @@ public class VehicleRepository {
     public int getvehicleCounter() {
     	return vehicleCounter;
     	}
-    
+
     // --- Statistics (Required for Project) ---
 
     public double getAverageSpeed() {
@@ -158,7 +178,9 @@ public class VehicleRepository {
     }
 
     // --- Getters ---
-
+    public List<VehicleWrap> getAllVehicles() {
+        return new ArrayList<>(vehicles);
+    }
     public ArrayList<VehicleWrap> getList() { 
         return vehicles; 
     }

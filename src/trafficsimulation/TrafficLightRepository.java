@@ -67,5 +67,14 @@ public class TrafficLightRepository {
     public List<TrafficLightWrap> getList() { 
         return lights; 
     }
-
-}
+//Finds a specific traffic light by  id, and return null if not found
+    
+    public TrafficLightWrap findlight(String id ) { 
+    	for (TrafficLightWrap t1 : lights) {
+    		if (t1.getID().equals(id)) {
+    return t1;
+    }
+    		} 
+    	return null;
+    	}
+    }

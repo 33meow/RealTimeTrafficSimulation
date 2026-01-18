@@ -23,6 +23,7 @@ public class MapPanel extends JPanel {
     private SimulationManager manager;
     private Map<String, Image> imageMap = new HashMap<>();
     private List<List<SumoPosition2D>> roadShapes = new ArrayList<>();
+    private List<VehicleWrap> vehiclesToShow;
 
     // --- State Flags ---
     private boolean mapLoaded = false;
@@ -37,7 +38,7 @@ public class MapPanel extends JPanel {
     public MapPanel(SimulationManager manager) {
         this.manager = manager;
         this.setBackground(new Color(50, 150, 50)); // Background: Green Grass
-        
+        this.vehiclesToShow = new ArrayList<>();
         // Load Vehicle Images
         loadImage("Red",    "photos/red.png");
         loadImage("Yellow", "photos/yellow.png");
@@ -201,33 +202,39 @@ public class MapPanel extends JPanel {
         // 3. Draw Vehicles
         // ==========================================
         try {
-            List<String> carList = (List<String>) manager.getConnection().do_job_get(Vehicle.getIDList());
-            for (String carId : carList) {
-                // Retrieve vehicle info or create temporary wrapper
-                VehicleWrap car = null;
-                if (manager.getRepository() != null) {
-                    for(VehicleWrap v : manager.getRepository().getList()) {
-                        if(v.getID().equals(carId)) { car = v; break; }
-                    }
-                }
-                if (car == null) car = new VehicleWrap(carId, manager.getConnection(), "Red");
+            // Bestimme welche Autos gezeichnet werden sollen
+            List<VehicleWrap> carsToShow;
 
+            if (vehiclesToShow != null && !vehiclesToShow.isEmpty()) {
+                // FILTER AKTIV: Zeige nur gefilterte Autos
+                carsToShow = vehiclesToShow;
+            } else {
+                // KEINE FILTER: Zeige alle Autos aus Repository
+                if (manager.getRepository() != null) {
+                    carsToShow = manager.getRepository().getList();
+                } else {
+                    carsToShow = new ArrayList<>();
+                }
+            }
+
+            // Zeichne alle Autos aus der Liste
+            for (VehicleWrap car : carsToShow) {
                 Point2D.Double pos = car.getPosition();
                 double angle = car.getAngle();
-                
+
                 // Calculate screen position
                 int x = (int) ((pos.x * scaleFactor) + offsetX);
                 int y = (int) (getHeight() - (pos.y * scaleFactor) + offsetY);
 
                 // Vehicle Size (Dynamic)
-                double realCarLen = 7.0; 
+                double realCarLen = 7.0;
                 int pixelSize = (int) (realCarLen * scaleFactor);
                 if (pixelSize < 5) pixelSize = 5;
 
                 // Rotate and Draw
                 var oldTransform = g2d.getTransform();
                 g2d.translate(x, y);
-                g2d.rotate(Math.toRadians(angle)); 
+                g2d.rotate(Math.toRadians(angle));
 
                 Image imgToDraw = imageMap.get(car.getImageName());
                 if (imgToDraw == null) imgToDraw = imageMap.get("Red");
@@ -240,9 +247,15 @@ public class MapPanel extends JPanel {
                 }
                 g2d.setTransform(oldTransform);
             }
-        } catch (Exception e) { }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void updateVehicles(List<VehicleWrap> vehicles) {
+        this.vehiclesToShow = vehicles;
     }
 
-}
+    }
 
 

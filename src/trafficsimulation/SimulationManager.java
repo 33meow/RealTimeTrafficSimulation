@@ -6,6 +6,13 @@ import it.polito.appeal.traci.SumoTraciConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
+interface SimulationListener {
+    void onStepCompleted();
+}
+
 public class SimulationManager {
 
     // --- Configuration Constants ---
@@ -15,7 +22,6 @@ public class SimulationManager {
 
     private static final Logger logger = LogManager.getLogger(SimulationManager.class);
 
-
     // --- Core Connection Fields ---
     private SumoTraciConnection conn;
     private int stepCounter = 0;
@@ -23,6 +29,12 @@ public class SimulationManager {
     // --- Data Repositories ---
     private VehicleRepository vehicleRepo;
     private TrafficLightRepository lightRepo;
+
+    private List<SimulationListener> listeners = new ArrayList<>();
+
+    public void addListener(SimulationListener listener) {
+        listeners.add(listener);
+    }
 
     /**
      * Initializes the connection to SUMO and sets up data repositories.
@@ -51,7 +63,7 @@ public class SimulationManager {
         }
     }
     
-    //initialisiert LogExport durch einen (parameterlosen) Konstruktor 
+    //initialisiert LogExport durch einen (parameterlosen) Konstruktor
     private LogExport exLog = new LogExport();
 
 
@@ -76,16 +88,18 @@ public class SimulationManager {
             // 4. Update Counters & Logs
             stepCounter++; 
             double time = (double) conn.do_job_get(Simulation.getTime());
-            
             //System.out.println("Step: " + stepCounter + " | Sim Time: " + time);
             logger.debug("Step: {} | Sim Time: {}", stepCounter, time);
             
             
-            int vehicleCounter = vehicleRepo.getvehicleCounter(); 
+            int vehicleCounter = vehicleRepo.getvehicleCounter();
             
             // CSV Log-Eintrag
-            exLog.logStep(stepCounter, time, vehicleCounter);  
-            
+            //exLog.logStep(stepCounter, time); //exLog.logStep(stepCounter, time, vehicleCount); wenn vehicleCount implementiert ist
+            // 5. Update Listeners
+            notifyListeners();
+            exLog.logStep(stepCounter, time, vehicleCounter);
+
         } catch (Exception e) {
             //e.printStackTrace();
             logger.error("Error during simulation step:", e);
@@ -107,6 +121,12 @@ public class SimulationManager {
         }
     }
 
+    private void notifyListeners() {
+        for (SimulationListener listener : listeners) {
+            listener.onStepCompleted();
+        }
+    }
+
     // --- Getters for MVC Architecture ---
 
     public TrafficLightRepository getLightRepository() {
@@ -119,6 +139,10 @@ public class SimulationManager {
     
     public SumoTraciConnection getConnection() {
         return this.conn;
+    }
+
+    public int getStepCounter() {
+        return stepCounter;
     }
 
 }

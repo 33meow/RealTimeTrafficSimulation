@@ -18,7 +18,10 @@ public class MainFrame extends JFrame {
     
     // --- Main Components ---
     private MapPanel mapPanel;
-    
+
+    // --- Filter Panel ---
+    private FilterPanel filterPanel;
+
     // --- Control Panel Components ---
     private JButton startButton;
     private JButton stepButton;
@@ -33,7 +36,14 @@ public class MainFrame extends JFrame {
 
     private JButton stressTestButton;  //for stress test
 
+<<<<<<< HEAD
  
+=======
+        //for Trafficlight control
+    private JTextField durationInput;
+    private JButton    setDurationButton;
+
+>>>>>>> 5c8eb1ddc8fa5c020fe6fecbda10a3d20a6c9dae
     // Dropdown menu for vehicle selection
     private JComboBox<String> carSelector;
 
@@ -64,7 +74,11 @@ public class MainFrame extends JFrame {
 
         stressTestButton = new JButton("Stress Test"); // for Stress test
          switchLightButton = new JButton("Switch"); //for TrafficLight
-        
+
+        //For TrafficLight Control
+         durationInput = new JTextField("30", 3); // 30s, width 3
+         setDurationButton = new JButton("Set Time");
+
         // Initialize Car Selector
         String[] carTypes = {"Red", "Yellow", "Blue", "White"};
         carSelector = new JComboBox<>(carTypes);
@@ -83,6 +97,7 @@ public class MainFrame extends JFrame {
         bottomPanel.add(new JLabel(" | Signal: ")); //for TrafficLight (choosing which one to change)
         bottomPanel.add(lightSelector);				//for TrafficLight
         bottomPanel.add(switchLightButton);         //for TrafficLight
+<<<<<<< HEAD
         bottomPanel.add(exportCsvButton);			
         
         
@@ -110,11 +125,24 @@ public class MainFrame extends JFrame {
         
       
     
+=======
+
+        bottomPanel.add(new JLabel("Duration (s):"));
+        bottomPanel.add(durationInput);
+        bottomPanel.add(setDurationButton);
+
+>>>>>>> 5c8eb1ddc8fa5c020fe6fecbda10a3d20a6c9dae
         // Add Bottom Panel to Frame
         add(bottomPanel, BorderLayout.SOUTH);
         
         // Show Window
         setVisible(true);
+    }
+    public void setFilterPanel(FilterPanel filterPanel) {
+        this.filterPanel=filterPanel;
+        add(filterPanel, BorderLayout.EAST);
+        revalidate();
+        repaint();
     }
 
     // --- Getters for Controller Access ---
@@ -128,9 +156,15 @@ public class MainFrame extends JFrame {
     public JButton getStressTestButton() { return stressTestButton; }
     public JComboBox<String> getLightSelector() { return lightSelector; } //for TrafficLight
     public JButton getSwitchLightButton() { return switchLightButton; }	//for TrafficLight
+<<<<<<< HEAD
     //public JButton getExportCsvButton() { return exportCsvButton; }
+=======
+    public JTextField getDurationInput() { return durationInput;}
+    public JButton getSetDurationButton() {return setDurationButton; }
+>>>>>>> 5c8eb1ddc8fa5c020fe6fecbda10a3d20a6c9dae
 
 }
+
 
 
 
