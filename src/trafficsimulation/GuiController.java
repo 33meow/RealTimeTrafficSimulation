@@ -101,6 +101,8 @@ public class GuiController {
                 manager.getRepository().addVehicle(1, "DEFAULT_VEHTYPE", selectedImage);
                 manager.nextStep(); 
                 view.getMapPanel().repaint();
+                // --- STATISTICS ---
+                updateStatistics();
             }
         });
 
