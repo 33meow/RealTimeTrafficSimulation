@@ -39,11 +39,11 @@ public class MapPanel extends JPanel {
         this.setBackground(new Color(50, 150, 50)); // Background: Green Grass
         
         // Load Vehicle Images
-        loadImage("standard", "photos/car.png");
-        loadImage("ferrari",  "photos/ferrari.png");
-        loadImage("Formula1", "photos/Formula1.png");
-        loadImage("Bugatti",  "photos/Bugatti.png");
-        loadImage("Red Car", "photos/car.png");
+        loadImage("Red",    "photos/red.png");
+        loadImage("Yellow", "photos/yellow.png");
+        loadImage("Blue",   "photos/blue.png");
+        loadImage("White",  "photos/white.png");
+
 
         // --- Mouse Listener for Panning (Drag) ---
         MouseAdapter ma = new MouseAdapter() {
@@ -210,7 +210,7 @@ public class MapPanel extends JPanel {
                         if(v.getID().equals(carId)) { car = v; break; }
                     }
                 }
-                if (car == null) car = new VehicleWrap(carId, manager.getConnection(), "standard");
+                if (car == null) car = new VehicleWrap(carId, manager.getConnection(), "Red");
 
                 Point2D.Double pos = car.getPosition();
                 double angle = car.getAngle();
@@ -230,7 +230,7 @@ public class MapPanel extends JPanel {
                 g2d.rotate(Math.toRadians(angle)); 
 
                 Image imgToDraw = imageMap.get(car.getImageName());
-                if (imgToDraw == null) imgToDraw = imageMap.get("standard");
+                if (imgToDraw == null) imgToDraw = imageMap.get("Red");
 
                 if (imgToDraw != null) {
                     g2d.drawImage(imgToDraw, -pixelSize/2, -pixelSize/2, pixelSize, pixelSize, this);
@@ -244,4 +244,5 @@ public class MapPanel extends JPanel {
     }
 
 }
+
 
