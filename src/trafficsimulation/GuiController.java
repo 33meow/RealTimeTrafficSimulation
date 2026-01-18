@@ -93,7 +93,6 @@ public class GuiController {
             if (selectedId != null && manager.getLightRepository() != null) {
                 for (TrafficLightWrap tl : manager.getLightRepository().getList()) {
                     if (tl.getID().equals(selectedId)) {
-                        
                         logger.info("Switching Light: {}", selectedId);
                         
                         // 1. Switch the light logic
@@ -218,6 +217,5 @@ public class GuiController {
 
     }
 }
-
 
 

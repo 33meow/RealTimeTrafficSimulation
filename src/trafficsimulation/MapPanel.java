@@ -11,11 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// SUMO Imports
 import de.tudresden.sumo.cmd.Lane;
-import de.tudresden.sumo.cmd.Vehicle;
 import de.tudresden.sumo.objects.SumoGeometry;
-import de.tudresden.sumo.objects.SumoPosition2D; 
+import de.tudresden.sumo.objects.SumoPosition2D;
 
 public class MapPanel extends JPanel {
 
@@ -71,18 +69,12 @@ public class MapPanel extends JPanel {
         });
     }
 
-    /**
-     * Helper method to load images safely into the map.
-     */
     private void loadImage(String name, String path) {
         ImageIcon icon = new ImageIcon(path);
         if (icon.getIconWidth() > 0) imageMap.put(name, icon.getImage());
         else System.out.println("⚠️ Image not found: " + path);
     }
 
-    /**
-     * Loads road geometry from SUMO (executed once per map).
-     */
     public void loadMap() {
         if (manager.getConnection() == null || mapLoaded) return;
         try {
@@ -102,9 +94,6 @@ public class MapPanel extends JPanel {
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-    /**
-     * Calculates the optimal Zoom and Offset to fit the map on screen.
-     */
     public void centerMap() {
         if (roadShapes.isEmpty() || getWidth() == 0 || getHeight() == 0) return;
 

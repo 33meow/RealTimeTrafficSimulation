@@ -36,14 +36,12 @@ public class MainFrame extends JFrame {
 
     private JButton stressTestButton;  //for stress test
 
-<<<<<<< HEAD
 
-=======
-        //for Trafficlight control
+    //for Trafficlight control
     private JTextField durationInput;
     private JButton    setDurationButton;
 
->>>>>>> 5c8eb1ddc8fa5c020fe6fecbda10a3d20a6c9dae
+
     // Dropdown menu for vehicle selection
     private JComboBox<String> carSelector;
 
@@ -107,7 +105,7 @@ public class MainFrame extends JFrame {
         bottomPanel.add(new JLabel(" | Signal: ")); //for TrafficLight (choosing which one to change)
         bottomPanel.add(lightSelector);				//for TrafficLight
         bottomPanel.add(switchLightButton);         //for TrafficLight
-<<<<<<< HEAD
+
         bottomPanel.add(exportCsvButton);
 
 
@@ -135,13 +133,13 @@ public class MainFrame extends JFrame {
 
 
 
-=======
+
 
         bottomPanel.add(new JLabel("Duration (s):"));
         bottomPanel.add(durationInput);
         bottomPanel.add(setDurationButton);
 
->>>>>>> 5c8eb1ddc8fa5c020fe6fecbda10a3d20a6c9dae
+
         // Add Bottom Panel to Frame
         add(bottomPanel, BorderLayout.SOUTH);
         
@@ -166,12 +164,12 @@ public class MainFrame extends JFrame {
     public JButton getStressTestButton() { return stressTestButton; }
     public JComboBox<String> getLightSelector() { return lightSelector; } //for TrafficLight
     public JButton getSwitchLightButton() { return switchLightButton; }	//for TrafficLight
-<<<<<<< HEAD
+
     //public JButton getExportCsvButton() { return exportCsvButton; }
-=======
+
     public JTextField getDurationInput() { return durationInput;}
     public JButton getSetDurationButton() {return setDurationButton; }
->>>>>>> 5c8eb1ddc8fa5c020fe6fecbda10a3d20a6c9dae
+
 
     // --- NEW: Statistics access ---
     public StatisticsPanel getStatisticsPanel() {return statisticsPanel;}
