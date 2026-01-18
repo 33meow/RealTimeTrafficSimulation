@@ -49,11 +49,8 @@ public class StatisticsPanel extends JPanel {
                 value
         );
 
-        /**
-         * Refreshes the CO2 history display.
-         */
-        private void updateCo2Display() {
-            StringBuilder sb = new StringBuilder("Last 5 CO₂ steps:\n");
+        // Insert new line at the very top
+        co2HistoryArea.insert(line, 0);
 
             for (int i = 0; i < co2History.size(); i++) {
                 sb.append(String.format("Step %d: %.2f%n", i + 1, co2History.get(i)));
