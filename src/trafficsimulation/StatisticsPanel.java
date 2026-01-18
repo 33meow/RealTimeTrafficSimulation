@@ -31,12 +31,12 @@ public class StatisticsPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-        /**
-         * Updates the vehicle count label.
-         */
-        public void setVehicleCount(int count) {
-            vehicleCountLabel.setText("Vehicles: " + count);
-        }
+    /**
+     * Updates the vehicle count label.
+     */
+    public void setVehicleCount(int count) {
+        vehicleCountLabel.setText("Vehicles: " + count);
+    }
 
         /**
          * Adds a new CO2 value and keeps only the last five.
