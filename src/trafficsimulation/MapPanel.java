@@ -68,13 +68,17 @@ public class MapPanel extends JPanel {
             repaint();
         });
     }
-
+    /**
+     * Helper method to load images safely into the map.
+     */
     private void loadImage(String name, String path) {
         ImageIcon icon = new ImageIcon(path);
         if (icon.getIconWidth() > 0) imageMap.put(name, icon.getImage());
         else System.out.println("⚠️ Image not found: " + path);
     }
-
+    /**
+     * Loads road geometry from SUMO (executed once per map).
+     */
     public void loadMap() {
         if (manager.getConnection() == null || mapLoaded) return;
         try {
@@ -93,7 +97,9 @@ public class MapPanel extends JPanel {
             repaint();
         } catch (Exception e) { e.printStackTrace(); }
     }
-
+    /**
+     * Calculates the optimal Zoom and Offset to fit the map on screen.
+     */
     public void centerMap() {
         if (roadShapes.isEmpty() || getWidth() == 0 || getHeight() == 0) return;
 
