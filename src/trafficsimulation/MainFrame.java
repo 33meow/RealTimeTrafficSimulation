@@ -112,6 +112,9 @@ public class MainFrame extends JFrame {
     public JTextField getDurationInput() { return durationInput;}
     public JButton getSetDurationButton() {return setDurationButton; }
 
+    // --- NEW: Statistics access ---
+    public StatisticsPanel getStatisticsPanel() {return statisticsPanel;}
+
 }
 
 
