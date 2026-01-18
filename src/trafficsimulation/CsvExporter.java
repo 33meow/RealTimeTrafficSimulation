@@ -10,7 +10,7 @@ public class CsvExporter {
         try (FileWriter writer = new FileWriter(filePath)) {
             
             // Header
-            writer.append("step;time;vehicles\n");
+            writer.append("step; time; vehicles\n");
             
             // Rows
             for (String[] row : rows) {

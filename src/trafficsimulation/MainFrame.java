@@ -2,6 +2,13 @@ package trafficsimulation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 
 /**
  * The Main Window (View) of the application.
@@ -17,6 +24,8 @@ public class MainFrame extends JFrame {
     private JButton stepButton;
     private JButton stopButton;
     private JButton addCarButton;
+    private JButton exportCsvButton;
+
     
     //for TrafficLight
     private JComboBox<String> lightSelector;
@@ -24,7 +33,7 @@ public class MainFrame extends JFrame {
 
     private JButton stressTestButton;  //for stress test
 
-    
+ 
     // Dropdown menu for vehicle selection
     private JComboBox<String> carSelector;
 
@@ -49,6 +58,9 @@ public class MainFrame extends JFrame {
         stepButton  = new JButton("Step");
         stopButton  = new JButton("Stop");
         addCarButton = new JButton("Add Car");
+        
+        exportCsvButton = new JButton("Export CSV"); //for the Export CSV button
+
 
         stressTestButton = new JButton("Stress Test"); // for Stress test
          switchLightButton = new JButton("Switch"); //for TrafficLight
@@ -71,7 +83,33 @@ public class MainFrame extends JFrame {
         bottomPanel.add(new JLabel(" | Signal: ")); //for TrafficLight (choosing which one to change)
         bottomPanel.add(lightSelector);				//for TrafficLight
         bottomPanel.add(switchLightButton);         //for TrafficLight
+        bottomPanel.add(exportCsvButton);			
         
+        
+        exportCsvButton.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            chooser.setSelectedFile(new File("simulation.csv"));
+
+            if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                try {
+                    Files.copy(
+                        Paths.get("simulation.csv"),
+                        chooser.getSelectedFile().toPath(),
+                        StandardCopyOption.REPLACE_EXISTING
+                    );
+                    JOptionPane.showMessageDialog(this, "CSV wurde gespeichert!");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Fehler beim Export!");
+                }
+            }
+        });
+        
+
+
+
+        
+      
+    
         // Add Bottom Panel to Frame
         add(bottomPanel, BorderLayout.SOUTH);
         
@@ -90,6 +128,7 @@ public class MainFrame extends JFrame {
     public JButton getStressTestButton() { return stressTestButton; }
     public JComboBox<String> getLightSelector() { return lightSelector; } //for TrafficLight
     public JButton getSwitchLightButton() { return switchLightButton; }	//for TrafficLight
+    //public JButton getExportCsvButton() { return exportCsvButton; }
 
 }
 

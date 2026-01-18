@@ -1,5 +1,9 @@
 package trafficsimulation;
 
+import java.io.File;
+
+import javax.swing.JFileChooser;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -105,6 +109,14 @@ public class GuiController {
                 logger.error("Simulation not running.");
             }
         });
+    
+       //view.getExportCsvButton().addActionListener(e -> {
+           // JFileChooser chooser = new JFileChooser();
+            //chooser.setSelectedFile(new File("simulation_log.csv"));
+       //});
+       
+       
+       
     }
 }
 
