@@ -21,9 +21,9 @@ public class StatisticsPanel extends JPanel {
         vehicleCountLabel = new JLabel("Vehicles: 0");
         vehicleCountLabel.setFont(new Font("Arial", Font.BOLD, 14));
 
-            co2HistoryArea = new JTextArea();
-            co2HistoryArea.setEditable(false);
-            co2HistoryArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        co2HistoryArea = new JTextArea();
+        co2HistoryArea.setEditable(false);
+        co2HistoryArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
 
             add(vehicleCountLabel, BorderLayout.NORTH);
             add(new JScrollPane(co2HistoryArea), BorderLayout.CENTER);
