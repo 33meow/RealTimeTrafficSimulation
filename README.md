@@ -59,11 +59,23 @@ Click **Export CSV** to download the CSV File to a folder of your choice.
 Change the duration and click **set Time** to adjust the traffic light duration.
 ![set Time](Screenshots/setTime.png)
 
-### 9. Stopping the Simulation
+### 11. Statistics
+See **Statistics** to see the number of vehicles and the CO2 output of the current step.
+![Statistics](Screenshots/Statistics.png)
+
+### 12. Filter
+Change the filter to select which type of car you want to see and click **Reset** to discard the filter.
+![Filter](Screenshots/Filter.png)
+
+### 13. Street
+Is also a filter and lets you select the edge of the street that you want to observe
+![Street](Screenshots/Streetedge.png)
+
+### 14. Stopping the Simulation
 Click the **Stop** button to close the connection and end the session safely.
 ![Click Stop](Screenshots/stop.png)
 
-### 10. Log Generation
+### 15. Log Generation
 The application automatically generates an `app.log` file recording all events.
 ![Log File](Screenshots/applog.png)
 
