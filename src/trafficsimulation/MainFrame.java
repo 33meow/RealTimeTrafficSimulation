@@ -11,7 +11,10 @@ public class MainFrame extends JFrame {
     
     // --- Main Components ---
     private MapPanel mapPanel;
-    
+
+    // --- Filter Panel ---
+    private FilterPanel filterPanel;
+
     // --- Control Panel Components ---
     private JButton startButton;
     private JButton stepButton;
@@ -27,7 +30,7 @@ public class MainFrame extends JFrame {
         //for Trafficlight control
     private JTextField durationInput;
     private JButton    setDurationButton;
-    
+
     // Dropdown menu for vehicle selection
     private JComboBox<String> carSelector;
 
@@ -59,7 +62,7 @@ public class MainFrame extends JFrame {
         //For TrafficLight Control
          durationInput = new JTextField("30", 3); // 30s, width 3
          setDurationButton = new JButton("Set Time");
-        
+
         // Initialize Car Selector
         String[] carTypes = {"Red", "Yellow", "Blue", "White"};
         carSelector = new JComboBox<>(carTypes);
@@ -82,12 +85,18 @@ public class MainFrame extends JFrame {
         bottomPanel.add(new JLabel("Duration (s):"));
         bottomPanel.add(durationInput);
         bottomPanel.add(setDurationButton);
-        
+
         // Add Bottom Panel to Frame
         add(bottomPanel, BorderLayout.SOUTH);
         
         // Show Window
         setVisible(true);
+    }
+    public void setFilterPanel(FilterPanel filterPanel) {
+        this.filterPanel=filterPanel;
+        add(filterPanel, BorderLayout.EAST);
+        revalidate();
+        repaint();
     }
 
     // --- Getters for Controller Access ---

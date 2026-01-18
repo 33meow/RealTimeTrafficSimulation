@@ -3,6 +3,8 @@ package trafficsimulation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 public class GuiController {
     
     // Logger for tracking events
@@ -10,6 +12,8 @@ public class GuiController {
     
     private MainFrame view;
     private SimulationManager manager;
+    private VehicleFilter filter;
+    private FilterPanel filterPanel;
 
     public GuiController(MainFrame view, SimulationManager manager) {
         this.view = view;
@@ -18,11 +22,28 @@ public class GuiController {
     }
 
     private void initController() {
+        manager.addListener(() -> {
+            if (filterPanel != null) {
+                filterPanel.update();
+            }
+            view.getMapPanel().repaint();
+        });
         
         // --- 1. START BUTTON ---
         view.getStartButton().addActionListener(e -> {
             logger.info("START clicked.");
             manager.startSimulation();
+
+            // Setup filter panel once repository is available
+            if (filter == null) {
+                VehicleRepository repo = manager.getRepository();
+                setupFilter(repo);
+                FilterPanel fp = getFilterPanel();
+                view.setFilterPanel(fp);
+                if (filterPanel != null) {
+                    filterPanel.update();
+                }
+            }
 
             // Populate list immediately after start finishes
             if (manager.getLightRepository() != null) {
@@ -74,7 +95,7 @@ public class GuiController {
                 String selectedImage = (String) view.getCarSelector().getSelectedItem();
                 logger.info("Adding car: {}", selectedImage);
                 manager.getRepository().addVehicle(1, "DEFAULT_VEHTYPE", selectedImage);
-                manager.nextStep(); 
+                manager.nextStep();
                 view.getMapPanel().repaint();
             }
         });
@@ -92,8 +113,17 @@ public class GuiController {
                     try {
                         for (int i = 0; i < 100; i++) {
                             manager.nextStep();
+
+                            //Update filter after every 10 steps
+                            if (filterPanel != null && i % 10 == 0) {
+                                filterPanel.update();
+                            }
                             view.getMapPanel().repaint();
                             Thread.sleep(50); // Small delay to see animation
+                        }
+                        //final update after stresstest
+                        if (filterPanel != null) {
+                            filterPanel.update();
                         }
                         logger.info("Stress Test Finished.");
                     } catch (InterruptedException ex) {
@@ -127,6 +157,21 @@ public class GuiController {
         	}
         		
         });
+    }
+    // Sets up the vehicle filter and associated panel
+    public void setupFilter(VehicleRepository repo) {
+        this.filter=new VehicleFilter(repo);
+        this.filterPanel=new FilterPanel(filter,this);
+    }
+    public FilterPanel getFilterPanel() {
+        return filterPanel;
+    }
+    public void refreshMap() {
+        MapPanel mapPanel =  view.getMapPanel();
+        List<VehicleWrap> filtered = filter.getFiltered();
+
+        mapPanel.updateVehicles(filter.getFiltered());
+        mapPanel.repaint();
     }
 }
 

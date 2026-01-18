@@ -23,6 +23,7 @@ public class MapPanel extends JPanel {
     private SimulationManager manager;
     private Map<String, Image> imageMap = new HashMap<>();
     private List<List<SumoPosition2D>> roadShapes = new ArrayList<>();
+    private List<VehicleWrap> vehiclesToShow;
 
     // --- State Flags ---
     private boolean mapLoaded = false;
@@ -37,7 +38,7 @@ public class MapPanel extends JPanel {
     public MapPanel(SimulationManager manager) {
         this.manager = manager;
         this.setBackground(new Color(50, 150, 50)); // Background: Green Grass
-        
+        this.vehiclesToShow = new ArrayList<>();
         // Load Vehicle Images
         loadImage("Red",    "photos/red.png");
         loadImage("Yellow", "photos/yellow.png");
@@ -201,33 +202,44 @@ public class MapPanel extends JPanel {
         // 3. Draw Vehicles
         // ==========================================
         try {
-            List<String> carList = (List<String>) manager.getConnection().do_job_get(Vehicle.getIDList());
-            for (String carId : carList) {
-                // Retrieve vehicle info or create temporary wrapper
-                VehicleWrap car = null;
+            // Bestimme welche Autos gezeichnet werden sollen
+            List<VehicleWrap> carsToShow;
+
+            if (vehiclesToShow != null && !vehiclesToShow.isEmpty()) {
+                // FILTER AKTIV: Zeige nur gefilterte Autos
+                carsToShow = vehiclesToShow;
+            } else {
+                // KEINE FILTER: Zeige alle Autos aus Repository
                 if (manager.getRepository() != null) {
+                    carsToShow = manager.getRepository().getList();
+                } else {
+                    carsToShow = new ArrayList<>();
+                }
+            }
                     for(VehicleWrap v : manager.getRepository().getList()) {
                         if(v.getID().equals(carId)) { car = v; break; }
                     }
                 }
                 if (car == null) car = new VehicleWrap(carId, manager.getConnection(), "Red");
 
+            // Zeichne alle Autos aus der Liste
+            for (VehicleWrap car : carsToShow) {
                 Point2D.Double pos = car.getPosition();
                 double angle = car.getAngle();
-                
+
                 // Calculate screen position
                 int x = (int) ((pos.x * scaleFactor) + offsetX);
                 int y = (int) (getHeight() - (pos.y * scaleFactor) + offsetY);
 
                 // Vehicle Size (Dynamic)
-                double realCarLen = 7.0; 
+                double realCarLen = 7.0;
                 int pixelSize = (int) (realCarLen * scaleFactor);
                 if (pixelSize < 5) pixelSize = 5;
 
                 // Rotate and Draw
                 var oldTransform = g2d.getTransform();
                 g2d.translate(x, y);
-                g2d.rotate(Math.toRadians(angle)); 
+                g2d.rotate(Math.toRadians(angle));
 
                 Image imgToDraw = imageMap.get(car.getImageName());
                 if (imgToDraw == null) imgToDraw = imageMap.get("Red");
@@ -240,7 +252,42 @@ public class MapPanel extends JPanel {
                 }
                 g2d.setTransform(oldTransform);
             }
-        } catch (Exception e) { }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+//    private void drawVehicle(Graphics g, VehicleWrap v) {
+//        // Position
+//        int x = (int) v.getX();
+//        int y = (int) v.getY();
+//
+//        // Farbe setzen
+//        g.setColor(parseColor(v.getColor()));
+//
+//        // Auto zeichnen
+//        g.fillRect(x - 5, y - 3, 10, 6);
+//
+//        // ID anzeigen
+//        g.setColor(Color.BLACK);
+//        g.setFont(new Font("Arial", Font.PLAIN, 8));
+//        g.drawString(v.getId(), x + 6, y);
+//    }
+    private Color parseColor(String color) {
+        if (color == null) return Color.GRAY;
+
+        try {
+            // Format: "255,0,0"
+            String[] parts = color.split(",");
+            int r = Integer.parseInt(parts[0].trim());
+            int g = Integer.parseInt(parts[1].trim());
+            int b = Integer.parseInt(parts[2].trim());
+            return new Color(r, g, b);
+        } catch (Exception e) {
+            return Color.GRAY;
+        }
+    }
+    public void updateVehicles(List<VehicleWrap> vehicles) {
+        this.vehiclesToShow = vehicles;
     }
 
 }
