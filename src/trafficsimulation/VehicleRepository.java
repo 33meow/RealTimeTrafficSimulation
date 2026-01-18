@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import de.tudresden.sumo.cmd.Simulation;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -115,30 +116,36 @@ public class VehicleRepository {
      * Syncs Java objects with SUMO.
      * Also removes cars that have finished their route.
      */
-    public void updateVehicles() {
+        public void updateVehicles() {
         try {
             // Get list of currently active vehicles in SUMO
             SumoStringList activeIds = (SumoStringList) conn.do_job_get(Vehicle.getIDList());
             
-            // Use Iterator to safely remove items while looping
-            Iterator<VehicleWrap> iterator = vehicles.iterator();
-            while (iterator.hasNext()) {
-                VehicleWrap car = iterator.next();
+            // Get list of vehicles that have arrived at their destination
+            SumoStringList arrivedIds = (SumoStringList) conn.do_job_get(de.tudresden.sumo.cmd.Simulation.getArrivedIDList());
 
+            // Iterate safely (works with CopyOnWriteArrayList)
+            for (VehicleWrap car : vehicles) {
+
+                // 1. If car has arrived/left the simulation -> Remove it
+                if (arrivedIds.contains(car.getID())) {
+                    vehicles.remove(car);
+                    continue;
+                }
+
+                // 2. If car is actively running -> Update it
                 if (activeIds.contains(car.getID())) {
-                    // Car is still running -> Update it
                     car.updateVehicle();
 
-                    // TypeID (for Debugging)
+                    // Debugging: TypeID
                     try {
                         String typeID = (String) conn.do_job_get(Vehicle.getTypeID(car.getID()));
-
                         System.out.println("Auto " + car.getID() + " - Type: " + typeID + " - ImageName: " + car.getImageName());
                     } catch (Exception e) {
                         System.out.println("Fehler beim Type holen: " + e.getMessage());
                     }
 
-                    // Edge aktualisieren
+                    // Update Edge for Filter
                     try {
                         String edge = (String) conn.do_job_get(Vehicle.getRoadID(car.getID()));
                         car.setEdge(edge);
@@ -146,10 +153,9 @@ public class VehicleRepository {
                     } catch (Exception e) {
                         System.out.println("Fehler beim Edge holen: " + e.getMessage());
                     }
-                } else {
-                    // Car is gone from SUMO -> Remove from Java list
-                    iterator.remove();
                 }
+                
+                // 3. If car is neither active nor arrived, it is in the Queue -> Keep it!
             }
         } catch (Exception e) { 
             logger.error("Error updating vehicles", e);
@@ -198,3 +204,4 @@ public class VehicleRepository {
         return total;
     }
 }
+
