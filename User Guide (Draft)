@@ -1,39 +1,91 @@
-User Guide (Draft): Traffic Simulation
+# Traffic Simulation – User Guide
 
-    1. Introduction:
-       Welcome to our Traffic Simulation tool. This tool allows you to simulate and analyse traffic flows in real time. You can control the vehicles and the signals.
+## 1. Introduction
 
-    2. Interface overview
-       The control panel contains buttons located at the bottom of the screen.
-       The following elements:
-    • Start
-    • Step
-    • Vehicle Type
-    • Add Car 
-    • Stop
-    • Stress Test
-    • Signal 
-    • Switch 
+Welcome to the **Traffic Simulation** tool. This application allows you to simulate, observe, and analyse traffic flows in real time. Users can manually add vehicles, control traffic signals, and perform stress tests to evaluate system behaviour under heavy traffic conditions.
 
-    3. Basic operation
+---
 
-    • Start:
-      To start the SUMO programme, press the start button.
-    • Step:
-      Advances the simulation by one step.
-    • Vehicle Type:
-      A dropdown menu to select the vehicle type to add. Options are: Standard, Ferrari, 
-      Formula 1, Bugatti and Red Car.
-    • Add Car:
-      Inserts a new vehicle of the selected type (default: standard) in a random position on the map.
-    • Stop:
-      Stops the SUMO program.
-    • Stress Test:
-      Stress tests the program with the maximum number of cars on the map with automatic steps.
-    • Signal:
-      A dropdown menu to select intercetion for the traffic light change.
-    • Switch:
-      Allows you to manually switch the state of the traffic light.
+## 2. Interface Overview
+
+The screenshot below (Figure 1) illustrates the main application window.
+
+**Figure 1: Traffic Simulation main window**
+The central simulation area shows a four-way intersection with black roads on a green background. Traffic lights are visible at the intersection (red and green indicators). Vehicles appear on the roads once added. Surrounding panels provide statistics, filters, and controls.
+
+The main window is divided into the following areas:
+
+* **Simulation Area (Center)**
+  Displays the road network, vehicles, and traffic lights in real time.
+
+* **Statistics Panel (Top Left)**
+  Shows current simulation statistics, such as the number of vehicles currently active in the simulation.
+
+* **Filter Panel (Right Side)**
+  Allows filtering by vehicle type and by street. The *Reset* button clears all active filters.
+
+* **Control Panel (Bottom)**
+  Contains all controls for running and managing the simulation.
+
+### Control Panel Buttons
+
+The control panel includes the following elements (as shown in Figure 1):
+
+* Start
+* Step
+* Vehicle Type
+* Add Car
+* Stop
+* Stress Test
+* Signal
+* Switch
+* Export CSV
+* Duration (s)
+* Set Time
+
+---
+
+## 3. Basic Operation
+
+### Start
+
+Starts the SUMO-based traffic simulation.
+
+### Step
+
+Advances the simulation by one single time step. This is useful for step-by-step analysis.
+
+### Vehicle Type
+
+A dropdown menu used to select the type of vehicle to be added. Available options include:
+
+* Blue
+* Red
+* Yellow
+* White
+
+### Add Car
+
+Adds a new vehicle of the selected type to a random position on the map.
+
+### Stop
+
+Stops the SUMO simulation and pauses all vehicle movement.
+
+### Stress Test
+
+Automatically fills the map with 100 vehicles and advances the simulation continuously to test performance under heavy load.
+
+### Signal
+
+A dropdown menu used to select a specific intersection or traffic signal.
+
+### Switch
+
+Manually switches the selected traffic light between its available states.
 
 
+### Settime
+
+Manually sets the time for the duration of traffic light switching.
 
