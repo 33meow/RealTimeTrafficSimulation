@@ -71,7 +71,13 @@ public class VehicleWrap {
      */
     public double getCo2Emission() {
         try {
-            return (double) conn.do_job_get(Vehicle.getCO2Emission(id));
+            double val= (double) conn.do_job_get(Vehicle.getCO2Emission(id));
+            // Sumo Overflow-Protection
+            if (val < 0) {
+                return 0.0;
+            }
+
+            return val;
         } catch (Exception e) {
             return 0.0;
         }
