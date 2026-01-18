@@ -2,7 +2,6 @@ package trafficsimulation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
 
 /**
  * Panel shown in the top-left corner of the GUI.
