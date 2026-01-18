@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2026-01-17T17:56:18.070019+01:00 by Eclipse SUMO GUI 1.25.0
+<!-- generated on 2026-01-18T03:13:38.551178+01:00 by Eclipse SUMO GUI 1.25.0
 <sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
 
     <input>
@@ -31,7 +31,7 @@
     </report>
 
     <traci_server>
-        <remote-port value="63316"/>
+        <remote-port value="64585"/>
     </traci_server>
 
     <gui_only>
@@ -43,14 +43,14 @@
 -->
 
 <meandata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/meandata_file.xsd">
-    <interval begin="0.00" end="30.00" id="wizard_example">
-        <edge id="-1423265551#1" sampledSeconds="26.10" traveltime="11.67" overlapTraveltime="12.89" density="9.91" overlapDensity="10.61" laneDensity="9.91" occupancy="4.74" waitingTime="0.00" timeLoss="4.82" speed="6.75" speedRelative="0.81" departed="1" arrived="0" entered="2" left="1" laneChangedFrom="0" laneChangedTo="0" flow="240.77"/>
-        <edge id="-1423265552#1" sampledSeconds="0.00" departed="0" arrived="0" entered="0" left="0" laneChangedFrom="0" laneChangedTo="0"/>
-        <edge id="-292429056" sampledSeconds="53.00" traveltime="29.42" overlapTraveltime="30.24" density="9.78" overlapDensity="9.78" laneDensity="9.78" occupancy="4.36" waitingTime="0.00" timeLoss="12.07" speed="6.14" speedRelative="0.74" departed="5" arrived="0" entered="0" left="0" laneChangedFrom="0" laneChangedTo="0" flow="216.15"/>
-        <edge id="-4588220#2" sampledSeconds="28.36" traveltime="11.52" overlapTraveltime="12.36" density="9.97" overlapDensity="10.37" laneDensity="9.97" occupancy="4.37" waitingTime="0.00" timeLoss="10.77" speed="7.78" speedRelative="0.56" departed="3" arrived="0" entered="1" left="1" laneChangedFrom="0" laneChangedTo="0" flow="279.45"/>
-        <edge id="1110748916" sampledSeconds="39.83" traveltime="11.28" overlapTraveltime="13.63" density="13.79" overlapDensity="16.33" laneDensity="13.79" occupancy="6.69" waitingTime="3.00" timeLoss="20.46" speed="6.33" speedRelative="0.46" departed="3" arrived="0" entered="0" left="2" laneChangedFrom="0" laneChangedTo="0" flow="314.38"/>
-        <edge id="1423265551#2" sampledSeconds="44.00" traveltime="27.05" overlapTraveltime="27.80" density="8.12" overlapDensity="8.12" laneDensity="8.12" occupancy="3.69" waitingTime="0.00" timeLoss="8.78" speed="6.68" speedRelative="0.80" departed="4" arrived="0" entered="0" left="0" laneChangedFrom="0" laneChangedTo="0" flow="195.16"/>
-        <edge id="1423265552#2" sampledSeconds="23.33" traveltime="9.88" overlapTraveltime="10.83" density="7.91" overlapDensity="8.51" laneDensity="7.91" occupancy="3.68" waitingTime="0.00" timeLoss="8.37" speed="8.89" speedRelative="0.64" departed="2" arrived="1" entered="1" left="1" laneChangedFrom="0" laneChangedTo="0" flow="253.29"/>
-        <edge id="1423271274" sampledSeconds="25.68" traveltime="11.67" overlapTraveltime="12.41" density="10.12" overlapDensity="10.44" laneDensity="10.12" occupancy="4.61" waitingTime="0.00" timeLoss="5.21" speed="7.01" speedRelative="0.84" departed="3" arrived="0" entered="1" left="1" laneChangedFrom="0" laneChangedTo="0" flow="255.47"/>
+    <interval begin="0.00" end="100.00" id="wizard_example">
+        <edge id="-1423265551#1" sampledSeconds="180.42" traveltime="13.30" overlapTraveltime="16.06" density="18.43" overlapDensity="22.00" laneDensity="18.43" occupancy="9.59" waitingTime="9.00" timeLoss="51.92" speed="5.42" speedRelative="0.65" departed="6" arrived="1" entered="6" left="9" laneChangedFrom="0" laneChangedTo="0" flow="359.48"/>
+        <edge id="-1423265552#1" sampledSeconds="128.13" traveltime="9.19" overlapTraveltime="10.35" density="14.17" overlapDensity="15.77" laneDensity="14.17" occupancy="6.90" waitingTime="0.00" timeLoss="41.53" speed="8.34" speedRelative="0.60" departed="6" arrived="4" entered="7" left="7" laneChangedFrom="0" laneChangedTo="0" flow="425.45"/>
+        <edge id="-292429056" sampledSeconds="1277.13" traveltime="91.18" overlapTraveltime="94.59" density="69.64" overlapDensity="70.69" laneDensity="69.64" occupancy="34.48" waitingTime="754.00" timeLoss="971.24" speed="1.96" speedRelative="0.24" departed="9" arrived="0" entered="12" left="3" laneChangedFrom="0" laneChangedTo="0" flow="492.05"/>
+        <edge id="-4588220#2" sampledSeconds="698.14" traveltime="40.37" overlapTraveltime="43.38" density="72.80" overlapDensity="76.59" laneDensity="72.80" occupancy="35.75" waitingTime="352.58" timeLoss="582.74" speed="2.22" speedRelative="0.16" departed="17" arrived="2" entered="6" left="8" laneChangedFrom="0" laneChangedTo="0" flow="580.86"/>
+        <edge id="1110748916" sampledSeconds="309.15" traveltime="15.87" overlapTraveltime="16.72" density="36.49" overlapDensity="38.03" laneDensity="36.49" occupancy="17.54" waitingTime="68.00" timeLoss="186.99" speed="5.16" speedRelative="0.37" departed="12" arrived="3" entered="7" left="13" laneChangedFrom="0" laneChangedTo="0" flow="677.88"/>
+        <edge id="1423265551#2" sampledSeconds="432.63" traveltime="27.50" overlapTraveltime="29.00" density="22.77" overlapDensity="23.95" laneDensity="22.77" occupancy="11.37" waitingTime="0.00" timeLoss="90.79" speed="6.40" speedRelative="0.77" departed="8" arrived="2" entered="7" left="12" laneChangedFrom="0" laneChangedTo="0" flow="524.84"/>
+        <edge id="1423265552#2" sampledSeconds="171.18" traveltime="10.01" overlapTraveltime="11.79" density="16.10" overlapDensity="18.74" laneDensity="16.10" occupancy="8.07" waitingTime="6.00" timeLoss="64.16" speed="8.17" speedRelative="0.59" departed="4" arrived="6" entered="12" left="6" laneChangedFrom="0" laneChangedTo="0" flow="473.53"/>
+        <edge id="1423271274" sampledSeconds="728.01" traveltime="56.66" overlapTraveltime="58.68" density="86.73" overlapDensity="88.77" laneDensity="86.73" occupancy="42.68" waitingTime="445.00" timeLoss="600.17" speed="1.48" speedRelative="0.18" departed="8" arrived="0" entered="8" left="10" laneChangedFrom="0" laneChangedTo="0" flow="462.95"/>
     </interval>
 </meandata>

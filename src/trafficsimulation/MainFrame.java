@@ -11,7 +11,10 @@ public class MainFrame extends JFrame {
     
     // --- Main Components ---
     private MapPanel mapPanel;
-    
+
+    // --- Filter Panel ---
+    private FilterPanel filterPanel;
+
     // --- Control Panel Components ---
     private JButton startButton;
     private JButton stepButton;
@@ -78,6 +81,12 @@ public class MainFrame extends JFrame {
         // Show Window
         setVisible(true);
     }
+    public void setFilterPanel(FilterPanel filterPanel) {
+        this.filterPanel=filterPanel;
+        add(filterPanel, BorderLayout.EAST);
+        revalidate();
+        repaint();
+    }
 
     // --- Getters for Controller Access ---
 
@@ -90,6 +99,7 @@ public class MainFrame extends JFrame {
     public JButton getStressTestButton() { return stressTestButton; }
     public JComboBox<String> getLightSelector() { return lightSelector; } //for TrafficLight
     public JButton getSwitchLightButton() { return switchLightButton; }	//for TrafficLight
+    public FilterPanel getFilterPanel() { return filterPanel; }
 
 }
 

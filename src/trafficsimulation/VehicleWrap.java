@@ -3,6 +3,8 @@ package trafficsimulation;
 import de.tudresden.sumo.cmd.Vehicle;
 import de.tudresden.sumo.objects.SumoPosition2D;
 import it.polito.appeal.traci.SumoTraciConnection;
+
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**
@@ -22,7 +24,17 @@ public class VehicleWrap {
     private Point2D.Double position;
     private double angle;
 
+    private String color;
+    private String edge;
+    private double x;
+    private double y;
+
     // --- Constructor ---
+    public VehicleWrap(String id) {
+        this.id=id;
+        this.conn = null;  // Erstmal null
+        this.imageName = "";
+    }
     public VehicleWrap(String id, SumoTraciConnection conn, String imageName) {
         this.id = id;
         this.conn = conn;
@@ -60,4 +72,14 @@ public class VehicleWrap {
     public double getSpeed() { return speed; }
     public double getAngle() { return angle; }
     public String getImageName() { return imageName; }
+    public String getId() { return id; }
+    public String getColor() { return color; }
+    public String getEdge() { return edge; }
+    public double getX() { return x; }
+    public double getY() { return y; }
+
+    public void setColor(String color) { this.color = color;}
+    public void setEdge(String edge) { this.edge = edge;}
+    public void setX(double x) { this.x = x;}
+    public void setY(double y) { this.y = y;}
 }

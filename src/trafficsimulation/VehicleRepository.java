@@ -3,9 +3,11 @@ package trafficsimulation;
 import de.tudresden.sumo.cmd.Edge;
 import de.tudresden.sumo.cmd.Route;
 import de.tudresden.sumo.cmd.Vehicle;
+import de.tudresden.sumo.objects.SumoColor;
 import de.tudresden.sumo.objects.SumoStringList;
 import it.polito.appeal.traci.SumoTraciConnection;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
@@ -107,6 +109,24 @@ public class VehicleRepository {
                 // Update only if the car is still in the simulation
                 if (activeIds.contains(car.getID())) {
                     car.updateVehicle();
+
+                    // TypeID (for Debugging)
+                    try {
+                        String typeID = (String) conn.do_job_get(Vehicle.getTypeID(car.getID()));
+
+                        System.out.println("Auto " + car.getID() + " - Type: " + typeID + " - ImageName: " + car.getImageName());
+                    } catch (Exception e) {
+                        System.out.println("Fehler beim Type holen: " + e.getMessage());
+                    }
+
+                    // Edge aktualisieren
+                    try {
+                        String edge = (String) conn.do_job_get(Vehicle.getRoadID(car.getID()));
+                        car.setEdge(edge);
+                        System.out.println("Auto " + car.getID() + " - Edge: " + edge);
+                    } catch (Exception e) {
+                        System.out.println("Fehler beim Edge holen: " + e.getMessage());
+                    }
                 }
             }
         } catch (Exception e) { 
@@ -121,7 +141,9 @@ public class VehicleRepository {
     }
 
     // --- Getters ---
-
+    public List<VehicleWrap> getAllVehicles() {
+        return new ArrayList<>(vehicles);
+    }
     public ArrayList<VehicleWrap> getList() { 
         return vehicles; 
     }
