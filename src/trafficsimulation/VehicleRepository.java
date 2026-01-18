@@ -195,6 +195,10 @@ public class VehicleRepository {
 
         try {
             for (VehicleWrap v : vehicles) {
+               double val= v.getCo2Emission();
+                System.out.println(
+                      //  "TEST CO2 | Step vehicle " + v.getID() + " = " + val + " mg/s"
+                );
                 total += v.getCo2Emission();
             }
         } catch (Exception e) {
