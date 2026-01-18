@@ -158,7 +158,7 @@ The project follows a standard Eclipse Java project structure, utilizing the **M
 | :--- | :--- | :--- | :---: |
 | **Milestone 1** | **27.11.2025** | • System Architecture Design<br>• SUMO Connection Setup (TraaS)<br>• Basic Simulation Loop | ✅ **Done** |
 | **Milestone 2** | **14.12.2025** | • **Interactive Map:** Real-time rendering (`MapPanel`)<br>• **Vehicle Injection:** Repository & Wrapper logic<br>• **Basic Control:** Start/Stop/Step buttons | ✅ **Done** |
-| **Milestone 3** | • **Traffic Light Control:** Phase switching (`TrafficLightWrap`)<br>• **Stress Testing:** High-load scenario implementation<br>• **Documentation:** User Guide & Progress Summary | ✅ **Implemented** |
+| **Milestone 3** |**18.01.2026** | • **Traffic Light Control:** Phase switching (`TrafficLightWrap`)<br>• **Stress Testing:** High-load scenario implementation<br>• **Documentation:** User Guide & Progress Summary | ✅ **Implemented** |
 | **Final Submission** | **18.01.2026** | • **Refinement:** Code Optimization & Final Bug Fixes<br>• **Final Deliverables:** Video Tutorial & Project Report<br>• **Presentation:** Preparing the final demo | ✅ **Done**  |
 
 ---
