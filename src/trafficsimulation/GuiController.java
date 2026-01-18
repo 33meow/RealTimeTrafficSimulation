@@ -17,6 +17,29 @@ public class GuiController {
         initController();
     }
 
+    /**
+     * Updates the statistics panel with the latest simulation data.
+     * This method must never be called directly from the Swing EDT.
+     */
+    private void updateStatistics() {
+
+        // Safety check: statistics panel might not exist yet
+        if (view.getStatisticsPanel() == null) {
+            return;
+        }
+
+        // Get data
+        int vehicleCount = manager.getActiveVehicleCount();
+        double co2 = manager.getCurrentCo2Emission();
+
+        // Update Swing components on the Event Dispatch Thread
+        SwingUtilities.invokeLater(() -> {
+            view.getStatisticsPanel().setVehicleCount(vehicleCount);
+            view.getStatisticsPanel().addCo2Value(co2);
+        });
+    }
+
+
     private void initController() {
         
         // --- 1. START BUTTON ---
