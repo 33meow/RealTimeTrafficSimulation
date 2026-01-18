@@ -96,7 +96,7 @@ public class SimulationManager {
             
             
             int vehicleCounter = vehicleRepo.getvehicleCounter();
-            
+            double co2= getCurrentCo2Emission();
             // CSV Log-Eintrag
             //exLog.logStep(stepCounter, time); //exLog.logStep(stepCounter, time, vehicleCount); wenn vehicleCount implementiert ist
             // 5. Update Listeners
