@@ -86,6 +86,7 @@ public class GuiController {
         // --- 3. STEP BUTTON ---
         view.getStepButton().addActionListener(e -> {
             manager.nextStep();
+            updateStatistics();
             view.getMapPanel().repaint();
         });
 
