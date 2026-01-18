@@ -216,11 +216,6 @@ public class MapPanel extends JPanel {
                     carsToShow = new ArrayList<>();
                 }
             }
-                    for(VehicleWrap v : manager.getRepository().getList()) {
-                        if(v.getID().equals(carId)) { car = v; break; }
-                    }
-                }
-                if (car == null) car = new VehicleWrap(carId, manager.getConnection(), "Red");
 
             // Zeichne alle Autos aus der Liste
             for (VehicleWrap car : carsToShow) {
@@ -255,41 +250,12 @@ public class MapPanel extends JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-//    private void drawVehicle(Graphics g, VehicleWrap v) {
-//        // Position
-//        int x = (int) v.getX();
-//        int y = (int) v.getY();
-//
-//        // Farbe setzen
-//        g.setColor(parseColor(v.getColor()));
-//
-//        // Auto zeichnen
-//        g.fillRect(x - 5, y - 3, 10, 6);
-//
-//        // ID anzeigen
-//        g.setColor(Color.BLACK);
-//        g.setFont(new Font("Arial", Font.PLAIN, 8));
-//        g.drawString(v.getId(), x + 6, y);
-//    }
-    private Color parseColor(String color) {
-        if (color == null) return Color.GRAY;
 
-        try {
-            // Format: "255,0,0"
-            String[] parts = color.split(",");
-            int r = Integer.parseInt(parts[0].trim());
-            int g = Integer.parseInt(parts[1].trim());
-            int b = Integer.parseInt(parts[2].trim());
-            return new Color(r, g, b);
-        } catch (Exception e) {
-            return Color.GRAY;
-        }
     }
     public void updateVehicles(List<VehicleWrap> vehicles) {
         this.vehiclesToShow = vehicles;
     }
 
-}
+    }
 
 

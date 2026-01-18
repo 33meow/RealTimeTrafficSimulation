@@ -95,7 +95,7 @@ public class SimulationManager {
             int vehicleCounter = vehicleRepo.getvehicleCounter();
             
             // CSV Log-Eintrag
-            exLog.logStep(stepCounter, time); //exLog.logStep(stepCounter, time, vehicleCount); wenn vehicleCount implementiert ist
+            //exLog.logStep(stepCounter, time); //exLog.logStep(stepCounter, time, vehicleCount); wenn vehicleCount implementiert ist
             // 5. Update Listeners
             notifyListeners();
             exLog.logStep(stepCounter, time, vehicleCounter);

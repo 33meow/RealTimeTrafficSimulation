@@ -3,111 +3,92 @@ package trafficsimulation;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Simple filter for vehicles by type and street
+ */
 public class VehicleFilter {
 
     private VehicleRepository repo;
-    private List<String> types;
-    private List<String> edges;
+    private List<String> types = new ArrayList<>();
+    private List<String> edges = new ArrayList<>();
 
     public VehicleFilter(VehicleRepository repo) {
         this.repo = repo;
-        this.types = new ArrayList<>();
-        this.edges = new ArrayList<>();
     }
 
-    // Filter for VehicleType
+    // Add/Remove filters
     public void addType(String type) {
-        if (!types.contains(type)) {
-            types.add(type);
-        }
+        if (!types.contains(type)) types.add(type);
     }
 
     public void removeType(String type) {
         types.remove(type);
     }
 
-    // Filter for Edge
     public void addEdge(String edge) {
-        if (!edges.contains(edge)) {
-            edges.add(edge);
-        }
+        if (!edges.contains(edge)) edges.add(edge);
     }
 
     public void removeEdge(String edge) {
         edges.remove(edge);
     }
 
-    // delete all filters
     public void clear() {
         types.clear();
         edges.clear();
     }
 
-    // get vehicles after applying filters
+    // Get filtered vehicles
     public List<VehicleWrap> getFiltered() {
         List<VehicleWrap> all = repo.getAllVehicles();
 
-        //if no filters active return all
-        if (types.isEmpty() && edges.isEmpty()) {
-            return all;
-        }
+        // No filters = return all
+        if (types.isEmpty() && edges.isEmpty()) return all;
 
         List<VehicleWrap> result = new ArrayList<>();
-
         for (VehicleWrap v : all) {
-            boolean ok = true;
-
-            // Prüfe Typ (wenn Filter aktiv)
-            if (!types.isEmpty()) {
-                String vType = v.getImageName();
-                if (vType == null || !types.contains(vType)) {
-                    ok = false;
-                }
-            }
-
-            // Prüfe Edge (wenn Filter aktiv)
-            if (!edges.isEmpty()) {
-                String vEdge = v.getEdge();
-                if (vEdge == null || !edges.contains(vEdge)) {
-                    ok = false;
-                }
-            }
-
-            if (ok) {
-                result.add(v);
-            }
+            if (matches(v)) result.add(v);
         }
-
         return result;
     }
 
-    // All available Types
+    // Check if vehicle matches filters
+    private boolean matches(VehicleWrap v) {
+        // Check type filter
+        if (!types.isEmpty()) {
+            String vType = v.getImageName();
+            if (vType == null || !types.contains(vType)) return false;
+        }
+
+        // Check edge filter
+        if (!edges.isEmpty()) {
+            String vEdge = v.getEdge();
+            if (vEdge == null || !edges.contains(vEdge)) return false;
+        }
+
+        return true;
+    }
+
+    // Get all available types
     public List<String> getAllTypes() {
-        if (repo == null || repo.getAllVehicles() == null) {
-            return new ArrayList<>();
-        }
-
-        List<String> result = new ArrayList<>();
-        for (VehicleWrap v : repo.getAllVehicles()) {
-            String type = v.getImageName();
-            if (type != null && !type.isEmpty() && !result.contains(type)) {
-                result.add(type);
-            }
-        }
-        return result;
+        return getUniqueValues(true);
     }
 
-    // All available Edges
+    // Get all available edges
     public List<String> getAllEdges() {
-        if (repo == null || repo.getAllVehicles() == null) {
-            return new ArrayList<>();
-        }
+        return getUniqueValues(false);
+    }
 
+    // Helper method to get unique values
+    private List<String> getUniqueValues(boolean isType) {
         List<String> result = new ArrayList<>();
+
+        if (repo == null || repo.getAllVehicles() == null) return result;
+
         for (VehicleWrap v : repo.getAllVehicles()) {
-            String edge = v.getEdge();
-            if (edge != null && !edge.isEmpty() && !result.contains(edge)) {
-                result.add(edge);
+            String value = isType ? v.getImageName() : v.getEdge();
+            if (value != null && !value.isEmpty() && !result.contains(value)) {
+                result.add(value);
             }
         }
         return result;
