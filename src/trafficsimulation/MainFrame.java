@@ -42,6 +42,14 @@ public class MainFrame extends JFrame {
         
         // 2. Add Map to Center
         add(mapPanel, BorderLayout.CENTER);
+
+        // --- Statistics Panel (Top Right) ---
+        statisticsPanel = new StatisticsPanel();
+
+// Use absolute positioning to ensure visibility on top of the map
+        mapPanel.setLayout(null);
+        statisticsPanel.setBounds(720, 10, 260, 180);
+        mapPanel.add(statisticsPanel);
         
         // 3. Setup Control Panel (Bottom)
         JPanel bottomPanel = new JPanel();
