@@ -6,7 +6,7 @@ import java.util.List;
 public class VehicleFilter {
 
     private VehicleRepository repo;
-    private List<String> types;   // Fahrzeugtyp statt Farbe!
+    private List<String> types;
     private List<String> edges;
 
     public VehicleFilter(VehicleRepository repo) {
@@ -15,7 +15,7 @@ public class VehicleFilter {
         this.edges = new ArrayList<>();
     }
 
-    // Filter für Fahrzeugtyp (imageName)
+    // Filter for VehicleType
     public void addType(String type) {
         if (!types.contains(type)) {
             types.add(type);
@@ -26,7 +26,7 @@ public class VehicleFilter {
         types.remove(type);
     }
 
-    // Filter für Edge
+    // Filter for Edge
     public void addEdge(String edge) {
         if (!edges.contains(edge)) {
             edges.add(edge);
@@ -37,17 +37,17 @@ public class VehicleFilter {
         edges.remove(edge);
     }
 
-    // Alle Filter löschen
+    // delete all filters
     public void clear() {
         types.clear();
         edges.clear();
     }
 
-    // Gefilterte Fahrzeuge holen
+    // get vehicles after applying filters
     public List<VehicleWrap> getFiltered() {
         List<VehicleWrap> all = repo.getAllVehicles();
 
-        // Keine Filter = alle zeigen
+        //if no filters active return all
         if (types.isEmpty() && edges.isEmpty()) {
             return all;
         }
@@ -81,7 +81,7 @@ public class VehicleFilter {
         return result;
     }
 
-    // Alle verfügbaren Fahrzeugtypen
+    // All available Types
     public List<String> getAllTypes() {
         if (repo == null || repo.getAllVehicles() == null) {
             return new ArrayList<>();
@@ -97,7 +97,7 @@ public class VehicleFilter {
         return result;
     }
 
-    // Alle verfügbaren Edges
+    // All available Edges
     public List<String> getAllEdges() {
         if (repo == null || repo.getAllVehicles() == null) {
             return new ArrayList<>();

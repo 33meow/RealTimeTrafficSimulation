@@ -251,22 +251,22 @@ public class MapPanel extends JPanel {
             e.printStackTrace();
         }
     }
-    private void drawVehicle(Graphics g, VehicleWrap v) {
-        // Position
-        int x = (int) v.getX();
-        int y = (int) v.getY();
-
-        // Farbe setzen
-        g.setColor(parseColor(v.getColor()));
-
-        // Auto zeichnen
-        g.fillRect(x - 5, y - 3, 10, 6);
-
-        // ID anzeigen
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("Arial", Font.PLAIN, 8));
-        g.drawString(v.getId(), x + 6, y);
-    }
+//    private void drawVehicle(Graphics g, VehicleWrap v) {
+//        // Position
+//        int x = (int) v.getX();
+//        int y = (int) v.getY();
+//
+//        // Farbe setzen
+//        g.setColor(parseColor(v.getColor()));
+//
+//        // Auto zeichnen
+//        g.fillRect(x - 5, y - 3, 10, 6);
+//
+//        // ID anzeigen
+//        g.setColor(Color.BLACK);
+//        g.setFont(new Font("Arial", Font.PLAIN, 8));
+//        g.drawString(v.getId(), x + 6, y);
+//    }
     private Color parseColor(String color) {
         if (color == null) return Color.GRAY;
 

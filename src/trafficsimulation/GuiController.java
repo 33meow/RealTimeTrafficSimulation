@@ -22,6 +22,12 @@ public class GuiController {
     }
 
     private void initController() {
+        manager.addListener(() -> {
+            if (filterPanel != null) {
+                filterPanel.update();
+            }
+            view.getMapPanel().repaint();
+        });
         
         // --- 1. START BUTTON ---
         view.getStartButton().addActionListener(e -> {
@@ -31,17 +37,9 @@ public class GuiController {
             // Setup filter panel once repository is available
             if (filter == null) {
                 VehicleRepository repo = manager.getRepository();
-                System.out.println("=== Repository Check beim Start ===");
-                System.out.println("Repo ist null? " + (repo == null));
-                if (repo != null) {
-                    System.out.println("Anzahl Autos: " + repo.getAllVehicles().size());
-                }
-
                 setupFilter(repo);
-
                 FilterPanel fp = getFilterPanel();
                 view.setFilterPanel(fp);
-                //First filter update
                 if (filterPanel != null) {
                     filterPanel.update();
                 }
@@ -85,10 +83,6 @@ public class GuiController {
         // --- 3. STEP BUTTON ---
         view.getStepButton().addActionListener(e -> {
             manager.nextStep();
-            // Update filter panel after each step
-            if (filterPanel != null) {
-                filterPanel.update();
-            }
             view.getMapPanel().repaint();
         });
 
@@ -102,10 +96,6 @@ public class GuiController {
                 logger.info("Adding car: {}", selectedImage);
                 manager.getRepository().addVehicle(1, "DEFAULT_VEHTYPE", selectedImage);
                 manager.nextStep();
-                // Update filter panel after adding car
-                if (filterPanel != null) {
-                    filterPanel.update();
-                }
                 view.getMapPanel().repaint();
             }
         });
@@ -146,6 +136,7 @@ public class GuiController {
             }
         });
     }
+    // Sets up the vehicle filter and associated panel
     public void setupFilter(VehicleRepository repo) {
         this.filter=new VehicleFilter(repo);
         this.filterPanel=new FilterPanel(filter,this);
@@ -155,9 +146,7 @@ public class GuiController {
     }
     public void refreshMap() {
         MapPanel mapPanel =  view.getMapPanel();
-
         List<VehicleWrap> filtered = filter.getFiltered();
-        System.out.println("*** Gefilterte Autos: " + filtered.size());
 
         mapPanel.updateVehicles(filter.getFiltered());
         mapPanel.repaint();

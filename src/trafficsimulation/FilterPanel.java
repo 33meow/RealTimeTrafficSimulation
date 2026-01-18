@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.List;
 
 /**
- * Einfaches Filter-Panel für Fahrzeugtyp und Edge
+ * Filter-Panel for VehicleType and Edge
  */
 public class FilterPanel extends JPanel {
 
@@ -25,21 +25,16 @@ public class FilterPanel extends JPanel {
         this.typeBoxes = new HashMap<>();
         this.edgeBoxes = new HashMap<>();
 
-        setPreferredSize(new Dimension(250, 600));
+        setPreferredSize(new Dimension(200, 600));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createTitledBorder("Filter"));
-
-        // Button for update
-        JButton refresh = new JButton("Update");
-        refresh.addActionListener(e -> update());
-        add(refresh);
 
         // Button for reset
         JButton clear = new JButton("Reset");
         clear.addActionListener(e -> clearAll());
         add(clear);
 
-        // Vehicle type
+        // VehicleType
         add(new JLabel("Vehicle type:"));
         typePanel = new JPanel();
         typePanel.setLayout(new BoxLayout(typePanel, BoxLayout.Y_AXIS));
@@ -67,7 +62,6 @@ public class FilterPanel extends JPanel {
     private void updateTypes() {
         List<String> types = filter.getAllTypes();
 
-        // Füge nur neue hinzu
         for (String type : types) {
             if (!typeBoxes.containsKey(type)) {
                 JCheckBox box = new JCheckBox(type);
@@ -91,7 +85,7 @@ public class FilterPanel extends JPanel {
     private void updateEdges() {
         List<String> edges = filter.getAllEdges();
 
-        // Entferne alte Edges die nicht mehr existieren
+        // remove old edges
         List<String> toRemove = new ArrayList<>();
         for (String oldEdge : edgeBoxes.keySet()) {
             if (!edges.contains(oldEdge)) {
@@ -104,7 +98,7 @@ public class FilterPanel extends JPanel {
         }
 
 
-        // Füge nur neue hinzu
+        // add new edges
         for (String edge : edges) {
             if (!edgeBoxes.containsKey(edge)) {
                 String displayName = edge.length() > 20 ?
