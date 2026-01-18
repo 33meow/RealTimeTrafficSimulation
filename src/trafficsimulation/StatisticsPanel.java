@@ -13,14 +13,10 @@ public class StatisticsPanel extends JPanel {
     private JLabel vehicleCountLabel;
     private JTextArea co2HistoryArea;
 
-        // Stores the last 5 CO2 values
-        private LinkedList<Double> co2History = new LinkedList<>();
-
-        public StatisticsPanel() {
-            System.out.println("StatisticsPanel CREATED");
-            setLayout(new BorderLayout());
-            setBorder(BorderFactory.createTitledBorder("Statistics"));
-            setPreferredSize(new Dimension(260, 180));
+    public StatisticsPanel() {
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createTitledBorder("Statistics"));
+        setPreferredSize(new Dimension(280, 220));
 
             vehicleCountLabel = new JLabel("Vehicles: 0");
             vehicleCountLabel.setFont(new Font("Arial", Font.BOLD, 14));
