@@ -18,8 +18,8 @@ public class StatisticsPanel extends JPanel {
         setBorder(BorderFactory.createTitledBorder("Statistics"));
         setPreferredSize(new Dimension(280, 220));
 
-            vehicleCountLabel = new JLabel("Vehicles: 0");
-            vehicleCountLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        vehicleCountLabel = new JLabel("Vehicles: 0");
+        vehicleCountLabel.setFont(new Font("Arial", Font.BOLD, 14));
 
             co2HistoryArea = new JTextArea();
             co2HistoryArea.setEditable(false);
