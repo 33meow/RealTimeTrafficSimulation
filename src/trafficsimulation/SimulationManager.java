@@ -1,6 +1,8 @@
 package trafficsimulation;
 
 import de.tudresden.sumo.cmd.Simulation;
+import de.tudresden.sumo.cmd.Vehicle;
+import de.tudresden.sumo.objects.SumoStringList;
 import it.polito.appeal.traci.SumoTraciConnection;
 
 import org.apache.logging.log4j.LogManager;
