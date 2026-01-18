@@ -4,13 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 
-    /**
-     * Panel shown in the top-right corner of the GUI.
-     * Displays live simulation statistics.
-     */
-    public class StatisticsPanel extends JPanel {
-        private JLabel vehicleCountLabel;
-        private JTextArea co2HistoryArea;
+/**
+ * Panel shown in the top-right corner of the GUI.
+ * Displays live simulation statistics.
+ */
+public class StatisticsPanel extends JPanel {
+
+    private JLabel vehicleCountLabel;
+    private JTextArea co2HistoryArea;
 
         // Stores the last 5 CO2 values
         private LinkedList<Double> co2History = new LinkedList<>();
