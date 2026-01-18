@@ -2,6 +2,7 @@ package trafficsimulation;
 
 import de.tudresden.sumo.cmd.Lane;
 import de.tudresden.sumo.cmd.Trafficlight;
+import de.tudresden.sumo.cmd.Vehicle;
 import de.tudresden.sumo.objects.SumoGeometry;
 import de.tudresden.sumo.objects.SumoPosition2D;
 import de.tudresden.sumo.objects.SumoStringList;
