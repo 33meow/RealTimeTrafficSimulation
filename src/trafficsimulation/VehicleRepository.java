@@ -136,6 +136,10 @@ public class VehicleRepository {
         }
     }
 
+    public int getvehicleCounter() {
+    	return vehicleCounter;
+    	}
+    
     // --- Statistics (Required for Project) ---
 
     public double getAverageSpeed() {

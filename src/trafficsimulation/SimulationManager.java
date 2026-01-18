@@ -81,10 +81,10 @@ public class SimulationManager {
             logger.debug("Step: {} | Sim Time: {}", stepCounter, time);
             
             
-            //int vehicleCount = vehicleRepo.getVehicleCount(); //noch nicht implementiert
+            int vehicleCounter = vehicleRepo.getvehicleCounter(); 
             
             // CSV Log-Eintrag
-            exLog.logStep(stepCounter, time); //exLog.logStep(stepCounter, time, vehicleCount); wenn vehicleCount implementiert ist
+            exLog.logStep(stepCounter, time, vehicleCounter); //exLog.logStep(stepCounter, time, vehicleCount); wenn vehicleCount implementiert ist
             
         } catch (Exception e) {
             //e.printStackTrace();
