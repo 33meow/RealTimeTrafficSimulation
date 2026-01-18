@@ -77,6 +77,7 @@ The project follows a standard Eclipse Java project structure, utilizing the **M
     * **View (GUI):**
         * `MainFrame.java`: The main application window and layout.
         * `MapPanel.java`: Responsible for rendering the map and simulation elements visually.
+        * `StatisticsPanel.java`: Responsible for visualisation of the statistic panel. 
     * **Model & Logic:**
         * `SimulationManager.java`: Core engine that manages the connection with SUMO via TraCI.
     * **Data Repositories:**
