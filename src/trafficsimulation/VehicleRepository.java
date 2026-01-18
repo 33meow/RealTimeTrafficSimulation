@@ -6,6 +6,7 @@ import de.tudresden.sumo.cmd.Vehicle;
 import de.tudresden.sumo.objects.SumoStringList;
 import it.polito.appeal.traci.SumoTraciConnection;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
@@ -13,14 +14,14 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Manages the lifecycle of vehicles in the simulation.
- * Handles adding new cars, defining their routes, and tracking their updates.
+ * FIXED: Handles Unique IDs safely and calculates statistics.
  */
 public class VehicleRepository {
     
     // --- Fields ---
     private ArrayList<VehicleWrap> vehicles;
     private SumoTraciConnection conn;
-    private int totalCars; 
+    private int vehicleCounter = 0; // Changed name to indicate it's a counter
     private Random rand; 
 
     private static final Logger logger = LogManager.getLogger(VehicleRepository.class);
@@ -29,19 +30,17 @@ public class VehicleRepository {
     public VehicleRepository(SumoTraciConnection conn) {
         this.conn = conn;
         this.vehicles = new ArrayList<>();
-        this.totalCars = 0;
+        this.vehicleCounter = 0;
         this.rand = new Random();
     }
 
-    // --- Core Logic ---
+ 
 
     /**
-     * Adds 'n' new vehicles to the simulation with random start and end points.
-     * * @param n Number of cars to add.
-     * @param type The internal SUMO vehicle type.
-     * @param imageName The name of the image (e.g., "ferrari") for visualization.
+     * Adds 'n' new vehicles safely.
+     * Uses 'synchronized' to prevent errors during Stress Tests.
      */
-    public void addVehicle(int n, String type, String imageName) {
+    public synchronized void addVehicle(int n, String type, String imageName) {
         try {
             // Fetch all available edges (roads)
             SumoStringList allEdges = (SumoStringList) conn.do_job_get(Edge.getIDList());
@@ -49,69 +48,103 @@ public class VehicleRepository {
             if (allEdges.isEmpty()) return;
 
             for (int i = 0; i < n; i++) {
-                // 1. Select a random Start Edge
-                // We loop to avoid internal edges (starting with ":") used for junctions
+                
+                // Generate Unique ID 
+                String carId;
+                do {
+                    vehicleCounter++;
+                    carId = "car_" + vehicleCounter;
+                } while (idExists(carId)); // Keep trying until we find a free ID
+
+                // --- 2. Select Random Start/End ---
                 String startEdge = getRandomEdge(allEdges);
-                while (startEdge.startsWith(":")) {
+                while (startEdge.startsWith(":")) { // Avoid junctions
                     startEdge = getRandomEdge(allEdges);
                 }
 
-                // 2. Select a random Destination Edge
-                // Must not be a junction and must not be the same as start
                 String endEdge = getRandomEdge(allEdges);
                 while (endEdge.startsWith(":") || endEdge.equals(startEdge)) {
                     endEdge = getRandomEdge(allEdges);
                 }
 
-                // 3. Generate unique IDs
-                String carId = "user_car_" + totalCars; 
+                // --- 3. Create Route ---
                 String newRouteID = "route_" + carId;
-
-                // 4. Create a temporary route (Start -> Start)
                 SumoStringList edgesForRoute = new SumoStringList();
                 edgesForRoute.add(startEdge);
                 conn.do_job_set(Route.add(newRouteID, edgesForRoute));
 
-                // 5. Add the vehicle to SUMO
+                // --- 4. Add to SUMO ---
                 conn.do_job_set(Vehicle.addFull(
                         carId, newRouteID, type, "now", "0", "0", "0", "current", "max", "current", "", "", "", 0, 0)
                 );
 
-                // 6. Set the real target (SUMO calculates the path automatically)
                 conn.do_job_set(Vehicle.changeTarget(carId, endEdge));
 
-                // 7. Store the vehicle wrapper with its visual image
+                // --- 5. Add to Java List ---
                 VehicleWrap newCar = new VehicleWrap(carId, conn, imageName);
                 vehicles.add(newCar);
 
-                logger.info("Added {} vehicles of type '{}' with image '{}'", n, type, imageName);
-                
-                totalCars++;
+                logger.info("Added unique vehicle: {}", carId);
             }
         } catch (Exception e) {
-            //System.err.println("Error adding vehicle:");
-            //e.printStackTrace();
             logger.error("Failed to add vehicle:", e);
         }
     }
 
     /**
-     * Syncs the Java objects with the current state of SUMO simulation.
+     * Checks if ID exists in Java List OR in SUMO.
+     */
+    private boolean idExists(String id) {
+        // Check local list
+        for (VehicleWrap v : vehicles) {
+            if (v.getID().equals(id)) return true;
+        }
+        // Check SUMO (Safety check)
+        try {
+            SumoStringList sumoList = (SumoStringList) conn.do_job_get(Vehicle.getIDList());
+            if (sumoList.contains(id)) return true;
+        } catch (Exception e) {
+            return true; // If error, assume ID is taken to be safe
+        }
+        return false;
+    }
+
+    /**
+     * Syncs Java objects with SUMO.
+     * Also removes cars that have finished their route.
      */
     public void updateVehicles() {
         try {
-            // Get list of currently active vehicles
+            // Get list of currently active vehicles in SUMO
             SumoStringList activeIds = (SumoStringList) conn.do_job_get(Vehicle.getIDList());
             
-            for (VehicleWrap car : vehicles) {
-                // Update only if the car is still in the simulation
+            // Use Iterator to safely remove items while looping
+            Iterator<VehicleWrap> iterator = vehicles.iterator();
+            while (iterator.hasNext()) {
+                VehicleWrap car = iterator.next();
+                
                 if (activeIds.contains(car.getID())) {
+                    // Car is still running -> Update it
                     car.updateVehicle();
+                } else {
+                    // Car is gone from SUMO -> Remove from Java list
+                    iterator.remove();
                 }
             }
         } catch (Exception e) { 
-            e.printStackTrace(); 
+            logger.error("Error updating vehicles", e);
         }
+    }
+
+    // --- Statistics (Required for Project) ---
+
+    public double getAverageSpeed() {
+        if (vehicles.isEmpty()) return 0.0;
+        double totalSpeed = 0;
+        for (VehicleWrap v : vehicles) {
+            totalSpeed += v.getSpeed();
+        }
+        return totalSpeed / vehicles.size();
     }
 
     // --- Helper Methods ---
@@ -125,5 +158,4 @@ public class VehicleRepository {
     public ArrayList<VehicleWrap> getList() { 
         return vehicles; 
     }
-
 }
