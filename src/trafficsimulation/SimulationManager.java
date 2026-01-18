@@ -51,7 +51,7 @@ public class SimulationManager {
         }
     }
     
-    //initiiert die LogExport-Klasse
+    //initialisiert LogExport durch einen (parameterlosen) Konstruktor 
     private LogExport exLog = new LogExport();
 
 
@@ -84,7 +84,7 @@ public class SimulationManager {
             int vehicleCounter = vehicleRepo.getvehicleCounter(); 
             
             // CSV Log-Eintrag
-            exLog.logStep(stepCounter, time, vehicleCounter); //exLog.logStep(stepCounter, time, vehicleCount); wenn vehicleCount implementiert ist
+            exLog.logStep(stepCounter, time, vehicleCounter);  
             
         } catch (Exception e) {
             //e.printStackTrace();
@@ -103,7 +103,7 @@ public class SimulationManager {
             
          // CSV Export
             CsvExporter.export("simulation.csv", exLog.getRows());
-            logger.info("Simulation data exported to simulation_run.csv");
+            logger.info("Simulation data exported to simulation.csv");
         }
     }
 
