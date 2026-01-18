@@ -52,12 +52,7 @@ public class StatisticsPanel extends JPanel {
         // Insert new line at the very top
         co2HistoryArea.insert(line, 0);
 
-            for (int i = 0; i < co2History.size(); i++) {
-                sb.append(String.format("Step %d: %.2f%n", i + 1, co2History.get(i)));
-            }
-
-            co2HistoryArea.setText(sb.toString());
-        }
+        // Keep view at the top
+        co2HistoryArea.setCaretPosition(0);
     }
-
-
+}
