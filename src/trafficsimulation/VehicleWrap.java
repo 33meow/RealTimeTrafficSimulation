@@ -53,6 +53,18 @@ public class VehicleWrap {
         }
     }
 
+    /**
+     * Returns the current CO2 emission of this vehicle (mg/s).
+     */
+    public double getCo2Emission() {
+        try {
+            return (double) conn.do_job_get(Vehicle.getCO2Emission(id));
+        } catch (Exception e) {
+            return 0.0;
+        }
+    }
+
+
     // --- Getters ---
 
     public Point2D.Double getPosition() { return position; }
