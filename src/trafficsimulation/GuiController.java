@@ -85,7 +85,7 @@ public class GuiController {
                 logger.warn("STARTING STRESS TEST");
                 
                 // Add cars
-                manager.getRepository().addVehicle(100, "DEFAULT_VEHTYPE", "standard");
+                manager.getRepository().addVehicle(100, "DEFAULT_VEHTYPE", "Red");
                 
                 // Run fast steps in a background thread
                 new Thread(() -> {
@@ -107,3 +107,4 @@ public class GuiController {
         });
     }
 }
+
