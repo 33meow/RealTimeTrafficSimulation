@@ -138,6 +138,7 @@ The project follows a standard Eclipse Java project structure, utilizing the **M
 | **Switch 🚦** | Forces the selected Traffic Light to switch to its next phase safely (Green → Yellow → Red). |
 | **Stress Test** | **(Pro Feature)** Injects 100 vehicles immediately and speeds up the simulation to test stability. |
 | **Stop** | Safely closes the connection to SUMO and saves the logs. |
+| **Export CSV** | Enables you to dowload the Log Data into a CSV File in a folder of your choosing. |
 
 ---
 
