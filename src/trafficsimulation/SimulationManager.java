@@ -121,5 +121,27 @@ public class SimulationManager {
         return this.conn;
     }
 
+
+
+    /**
+     * Returns the number of currently active vehicles in the simulation.
+     */
+    public int getActiveVehicleCount() {
+        try {
+            SumoStringList ids = (SumoStringList) conn.do_job_get(Vehicle.getIDList());
+            return ids.size();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Returns total CO2 emission of the current simulation step.
+     */
+    public double getCurrentCo2Emission() {
+        if (vehicleRepo == null) return 0.0;
+        return vehicleRepo.getTotalCo2Emission();
+    }
+
 }
 
