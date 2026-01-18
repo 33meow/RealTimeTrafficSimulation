@@ -171,7 +171,7 @@ public class MainFrame extends JFrame {
     public JButton getSetDurationButton() {return setDurationButton; }
 
 
-    // --- NEW: Statistics access ---
+    // --- Statistics access ---
     public StatisticsPanel getStatisticsPanel() {return statisticsPanel;}
 
 }
