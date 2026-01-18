@@ -105,6 +105,29 @@ public class GuiController {
                 logger.error("Simulation not running.");
             }
         });
+
+        // For traffic light control (set time=
+                view.getSetDurationButton().addActionListener(e -> {
+               
+        	try { 
+        		String selectedId = (String) view.getLightSelector().getSelectedItem();  //Get Selected Id
+        		String text = view.getDurationInput().getText(); // get the number the user wrote
+        		double newDuration = Double.parseDouble(text); //converting  text to number
+        		
+        		if (selectedId != null && manager.getLightRepository() != null) { 
+        			
+        			TrafficLightWrap light = manager.getLightRepository().findlight(selectedId);
+        			if (light != null) { light.setPhaseDuration(newDuration); //calling the new function
+        			logger.info("Updated {} duration to {} s", selectedId, newDuration);
+        			}
+        		}
+        		
+        	} catch (NumberFormatException ex) {logger.error("Please enter a valid number!");
+        	javax.swing.JOptionPane.showMessageDialog(view, "Please enter a valid number (for example 30 or 50)");
+        	}
+        		
+        });
     }
 }
+
 
