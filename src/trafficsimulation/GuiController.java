@@ -121,6 +121,8 @@ public class GuiController {
                             manager.nextStep();
                             view.getMapPanel().repaint();
                             Thread.sleep(50); // Small delay to see animation
+                            // --- STATISTICS ---
+                            updateStatistics();
                         }
                         logger.info("Stress Test Finished.");
                     } catch (InterruptedException ex) {
